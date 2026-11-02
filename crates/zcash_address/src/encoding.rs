@@ -195,6 +195,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn sprout() {
         encoding(
             "zc8E5gYid86n4bo2Usdq1cpr7PpfoJGzttwBHEEgGhGkLUg7SPPVFNB2AkRFXZ7usfphup5426dt1buMmY3fkYeRrQGLa8y",
@@ -213,6 +214,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn sapling() {
         encoding(
             "zs1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqpq6d8g",
@@ -275,6 +277,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn transparent() {
         encoding(
             "t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs",
@@ -307,6 +310,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn tex() {
         let p2pkh_str = "t1VmmGiyjVNeCjxDZzg7vZmd99WyzVby9yC";
         let tex_str = "tex1s2rt77ggv6q989lr49rkgzmh5slsksa9khdgte";
@@ -341,6 +345,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn tex_testnet() {
         let p2pkh_str = "tm9ofD7kHR7AF8MsJomEzLqGcrLCBkD9gDj";
         let tex_str = "textest1qyqszqgpqyqszqgpqyqszqgpqyqszqgpfcjgfy";
@@ -375,6 +380,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash address encodings")]
     fn whitespace() {
         assert_eq!(
             " t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse(),
@@ -393,6 +399,74 @@ mod tests {
         assert_eq!(
             "something t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs".parse::<ZcashAddress>(),
             Err(ParseError::NotZcash),
+        );
+    }
+
+    /// Ycash encodings: the transparent vectors are `ycashd`'s
+    /// (`src/test/data/base58_keys_valid.json`); the Sprout strings are the
+    /// Base58Check of the `ycashd` prefixes (`src/chainparams.cpp`) over zero data.
+    #[test]
+    #[cfg(feature = "ycash")]
+    fn ycash() {
+        fn hash(hex: &str) -> [u8; 20] {
+            let mut out = [0; 20];
+            for (i, byte) in out.iter_mut().enumerate() {
+                *byte = u8::from_str_radix(&hex[2 * i..2 * i + 2], 16).unwrap();
+            }
+            out
+        }
+        for (encoded, net, kind) in [
+            (
+                "s1WU7nhaD8sDzJuE9FJswRJvr1V7YY5HMyZ",
+                NetworkType::Main,
+                AddressKind::P2pkh(hash("65a16059864a2fdbc7c99a4723a8395bc6f188eb")),
+            ),
+            (
+                "s39DWVYZNpSnA5CqaDCK59icqGnWXjNaNaA",
+                NetworkType::Main,
+                AddressKind::P2sh(hash("74f209f6ea907e2ea48f74fae05782ae8a665257")),
+            ),
+            (
+                "smLgKs1cwfdJUjJXrrFR7FV9fxmmyQjcMF3",
+                NetworkType::Test,
+                AddressKind::P2pkh(hash("53c0307d6851aa0ce7825ba883c6bd9ad242b486")),
+            ),
+            (
+                "s2JvwJaFq5WpmF2bP1idLrvsp4u8seq8CSD",
+                NetworkType::Test,
+                AddressKind::P2sh(hash("6349a418fc4578d10a372b54b45c280cc8c4382f")),
+            ),
+            (
+                "ycP1y2TH71QG44H6nZCTC2sBsXjCF5kNNNHWi9ckmLJnGrT5whYeCjQ94kGcU5ZR1iUpG7P3eU2m1p6F1nM2PmMKfgd4pEa",
+                NetworkType::Main,
+                AddressKind::Sprout([0; 64]),
+            ),
+            (
+                "ytYo7rEt6AEj1tYSTggSLiXyNw2y5YTRdskJJvzQwshQrM9rScTkyYpJjYiEN6KKB4chqsFgsUzzaEX2z7YQTGGqEoPNx5q",
+                NetworkType::Test,
+                AddressKind::Sprout([0; 64]),
+            ),
+        ] {
+            encoding(encoded, ZcashAddress { net, kind });
+        }
+        for (net, hrp) in [
+            (NetworkType::Main, "ys1"),
+            (NetworkType::Test, "ytestsapling1"),
+            (NetworkType::Regtest, "yregtestsapling1"),
+        ] {
+            let addr = ZcashAddress {
+                net,
+                kind: AddressKind::Sapling([0; 43]),
+            };
+            let encoded = addr.to_string();
+            assert!(encoded.starts_with(hrp), "{encoded}");
+            assert_eq!(encoded.parse(), Ok(addr));
+        }
+        // A Zcash t-address is not a Ycash address.
+        assert!(
+            "t1Hsc1LR8yKnbbe3twRp88p6vFfC5t7DLbs"
+                .parse::<ZcashAddress>()
+                .is_err()
         );
     }
 }

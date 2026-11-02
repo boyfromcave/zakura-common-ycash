@@ -1005,6 +1005,7 @@ impl Authorization for TestUnauthorized {
 }
 
 #[test]
+#[cfg_attr(feature = "ycash", ignore = "Zcash NU5 test vectors")]
 fn zip_0244() {
     fn to_test_txdata(
         tv: &self::data::zip_0244::TestVector,
@@ -1150,5 +1151,24 @@ fn zip_0244() {
             v5_signature_hash(&txdata, &SignableInput::Shielded, &txid_parts).as_ref(),
             tv.sighash_shielded
         );
+    }
+}
+
+/// Ycash's fork epoch is a Sapling-era epoch: v4 transactions only (`ycashd`
+/// builds and accepts v4 under `UPGRADE_YCASH`).
+#[test]
+fn ycash_transactions_are_v4() {
+    assert_eq!(
+        TxVersion::suggested_for_branch(BranchId::Ycash),
+        TxVersion::V4
+    );
+    assert!(TxVersion::V4.valid_in_branch(BranchId::Ycash));
+    for version in [
+        TxVersion::Sprout(2),
+        TxVersion::V3,
+        TxVersion::V5,
+        TxVersion::V6,
+    ] {
+        assert!(!version.valid_in_branch(BranchId::Ycash), "{version:?}");
     }
 }

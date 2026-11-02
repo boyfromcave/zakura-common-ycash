@@ -2275,6 +2275,7 @@ mod tests {
 
     #[test]
     #[cfg(feature = "circuits")]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash network upgrade heights")]
     fn nu7_default_expiry_at_testnet_boundary() {
         let activation = TEST_NETWORK.activation_height(NetworkUpgrade::Nu7).unwrap();
         for (target, expected_delta) in [
@@ -2296,6 +2297,7 @@ mod tests {
         zcash_protocol::local_consensus::LocalNetwork {
             overwinter: Some(BlockHeight::from_u32(1)),
             sapling: Some(BlockHeight::from_u32(2)),
+            ycash: None,
             blossom: Some(BlockHeight::from_u32(3)),
             heartwood: Some(BlockHeight::from_u32(4)),
             canopy: Some(BlockHeight::from_u32(5)),
@@ -2315,6 +2317,7 @@ mod tests {
         zcash_protocol::local_consensus::LocalNetwork {
             overwinter: Some(BlockHeight::from_u32(1)),
             sapling: Some(BlockHeight::from_u32(2)),
+            ycash: None,
             blossom: Some(BlockHeight::from_u32(3)),
             heartwood: Some(BlockHeight::from_u32(4)),
             canopy: Some(BlockHeight::from_u32(5)),
@@ -2927,6 +2930,7 @@ mod tests {
 
     #[test]
     #[cfg(feature = "circuits")]
+    #[cfg_attr(feature = "ycash", ignore = "Zcash network upgrade heights")]
     fn add_orchard_change_output_records_change() {
         let target_height = TEST_NETWORK
             .activation_height(NetworkUpgrade::Nu6_3)

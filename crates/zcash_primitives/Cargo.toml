@@ -85,6 +85,8 @@ std = [
     "transparent/std",
 ]
 temporary-zcashd = []
+## Ycash consensus parameters and address encodings (see zakura-protocol's `ycash`).
+ycash = ["zcash_protocol/ycash"]
 test-dependencies = [
     "wallet",
     "dep:proptest",
