@@ -2,7 +2,7 @@
 //! `pq_script_tests.cpp`, and replays of the pinned cross-line vectors (`testdata/yellowback/`)
 //! against a mock checker.
 
-use alloc::vec::Vec;
+use alloc::{string::String, vec::Vec};
 use core::cell::RefCell;
 
 use sha2::{Digest, Sha256};
@@ -1132,4 +1132,381 @@ fn pq_sigops() {
         .op(OP_CHECKSIG);
     assert_eq!(s.code().pq_sig_op_count(), pq::SIGOP_COST);
     assert_eq!(s.code().sig_op_count(false), 1);
+}
+
+// ---------------------------------------------------------------------------------------------
+// The pinned cross-line vectors
+// ---------------------------------------------------------------------------------------------
+
+const VAULT_VECTORS: &str = include_str!("../../testdata/yellowback/vault_vectors.json");
+const PQ_VECTORS: &str = include_str!("../../testdata/yellowback/pq_vectors.json");
+const PIN: &str = include_str!("../../testdata/yellowback/PIN");
+
+fn json(s: &str) -> serde_json::Value {
+    serde_json::from_str(s).expect("valid JSON")
+}
+
+fn hx(v: &serde_json::Value) -> Vec<u8> {
+    hex::decode(v.as_str().expect("hex string")).expect("hex")
+}
+
+fn int(v: &serde_json::Value) -> i64 {
+    v.as_i64().expect("integer")
+}
+
+#[test]
+fn vectors_are_pinned() {
+    for (name, body) in [
+        ("vault_vectors.json", VAULT_VECTORS),
+        ("pq_vectors.json", PQ_VECTORS),
+    ] {
+        let want = PIN
+            .lines()
+            .filter(|l| !l.starts_with('#'))
+            .find_map(|l| {
+                let mut f = l.split_whitespace();
+                let (h, p) = (f.next()?, f.next()?);
+                (p == name).then(|| String::from(h))
+            })
+            .expect("pinned");
+        let got = hex::encode(Sha256::digest(body.as_bytes()));
+        assert_eq!(got, want, "{name} differs from its pin");
+    }
+    let doc = json(VAULT_VECTORS);
+    assert_eq!(int(&doc["branchId"]), 0x6d5b7a31);
+    assert_eq!(int(&doc["opcodes"]["CHECKSEQUENCEVERIFY"]), 0xb2);
+    assert_eq!(int(&doc["opcodes"]["CHECKSETSIG"]), 0xc0);
+    assert_eq!(int(&doc["opcodes"]["CHECKSETDORMANT"]), 0xc1);
+}
+
+/// The scriptSig's pushes (it is push-only), as an independent reassembly.
+fn pushes(script_sig: &[u8]) -> Vec<Vec<u8>> {
+    script::Code(script_sig.to_vec())
+        .parse()
+        .map(|op| match op.expect("parses") {
+            opcode::PossiblyBad::Good(crate::Opcode::PushValue(pv)) => pv.value(),
+            other => panic!("not a push: {other:?}"),
+        })
+        .collect()
+}
+
+/// `vault_vectors.json` `spends[]`: UNLOCK (V selector 1, role 1) and CANCEL (I selector 2,
+/// role 2) through the interpreter, with a mock whose set accepts exactly the vector's
+/// signatures.
+#[test]
+fn vault_vector_set_spends() {
+    let doc = json(VAULT_VECTORS);
+    let spends = doc["spends"].as_array().expect("spends");
+    assert_eq!(spends.len(), 2);
+    let flags = STANDARD | CSV | VAULT;
+    for sp in spends {
+        let name = sp["name"].as_str().unwrap();
+        let code = hx(&sp["scriptCode"]);
+        let ss = hx(&sp["scriptSig"]);
+        let set_id = <[u8; 32]>::try_from(hx(&sp["setId"])).unwrap();
+        let role = u8::try_from(int(&sp["role"])).unwrap();
+        let sigs: Vec<[u8; SET_SIG_SIZE]> = sp["sigs"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|s| <[u8; SET_SIG_SIZE]>::try_from(hx(s)).unwrap())
+            .collect();
+        let checker = Mock {
+            threshold: Some(u32::try_from(sigs.len()).unwrap()),
+            expected_sigs: Some(sigs.clone()),
+            ..Mock::default()
+        };
+        assert_eq!(verify(&ss, &code, flags, &checker), Ok(true), "{name}");
+        assert_eq!(*checker.last_set.borrow(), Some((set_id, role)), "{name}");
+        assert_eq!(*checker.last_sigs.borrow(), sigs, "{name}");
+        for s in &sigs {
+            assert!(is_compact_set_signature(s));
+        }
+        // the selector is the scriptSig's last push and equals the role
+        assert_eq!(pushes(&ss).last().unwrap(), &vec![role]);
+        // before the upgrade: a bad opcode
+        assert_eq!(
+            verify(&ss, &code, STANDARD | CSV, &checker),
+            Err(ierr(Error::BadOpcode)),
+            "{name}"
+        );
+        // a set that refuses the signatures, one with a higher threshold, an unknown set
+        for (threshold, expected) in [
+            (Some(u32::try_from(sigs.len()).unwrap()), Some(vec![])),
+            (Some(u32::try_from(sigs.len() + 1).unwrap()), None),
+            (None, None),
+        ] {
+            let refuse = Mock {
+                threshold,
+                expected_sigs: expected,
+                sigs_ok: true,
+                ..Mock::default()
+            };
+            assert_eq!(
+                verify(&ss, &code, flags, &refuse),
+                Err(ierr(Error::SetSig)),
+                "{name}"
+            );
+        }
+        // the default checker fails closed
+        assert_eq!(
+            verify(&ss, &code, flags, &NullSignatureChecker()),
+            Err(ierr(Error::SetSig))
+        );
+    }
+}
+
+/// `vault_vectors.json` `ownerSpends[]`: the owner's `OP_CHECKPQSIG` (V selector 2, after
+/// `OP_CHECKLOCKTIMEVERIFY`) and OWNER-RELEASED (V and I selector 3, after
+/// `OP_CHECKSETDORMANT OP_VERIFY`) through the interpreter. The mock answers the lock time and
+/// the set's release; it accepts the PQ signature only for the vector's owner key (by its own
+/// copy of the key, `pqOwner.pk` / `falconOwner.pk`) with `SIGHASH_ALL`, and the test checks
+/// that the signature the interpreter reassembled is the scriptSig's.
+#[test]
+fn vault_vector_owner_spends() {
+    let doc = json(VAULT_VECTORS);
+    let spends = doc["ownerSpends"].as_array().expect("ownerSpends");
+    assert_eq!(spends.len(), 4);
+    let owners = [&doc["pqOwner"], &doc["falconOwner"]];
+    for o in owners {
+        let pk = hx(&o["pk"]);
+        let scheme = u8::try_from(int(&o["owner"]["scheme"])).unwrap();
+        assert_eq!(pq::key_hash(scheme, &pk).to_vec(), hx(&o["owner"]["hash"]));
+    }
+    let flags = STANDARD | CSV | VAULT;
+    let (mut falcon, mut released) = (0, 0);
+    for sp in spends {
+        let name = sp["name"].as_str().unwrap();
+        let code = hx(&sp["scriptCode"]);
+        let ss = hx(&sp["scriptSig"]);
+        let selector = int(&sp["selector"]);
+        // the owner is the one whose key hash the script carries
+        let owner = owners
+            .iter()
+            .find(|o| {
+                let h = hx(&o["owner"]["hash"]);
+                code.windows(32).any(|w| w == h.as_slice())
+            })
+            .expect("a known owner");
+        let scheme = u8::try_from(int(&owner["owner"]["scheme"])).unwrap();
+        let pk = hx(&owner["pk"]);
+        let f = if scheme == pq::SCHEME_FN_DSA_512 {
+            falcon += 1;
+            flags | FALCON
+        } else {
+            flags
+        };
+        // the independent reassembly: <sig_1>..<sig_s> <s> <pk_1>..<pk_p> <p> <selector>
+        let a = pushes(&ss);
+        assert_eq!(a.last().unwrap(), &vec![u8::try_from(selector).unwrap()]);
+        let a = &a[..a.len() - 1];
+        let p = usize::from(a[a.len() - 1][0]);
+        let s = usize::from(a[a.len() - 2 - p][0]);
+        assert_eq!(a.len(), s + p + 2, "{name}");
+        let sig: Vec<u8> = a[..s].concat();
+        assert_eq!(a[s + 1..s + 1 + p].concat(), pk, "{name}");
+        assert_eq!(*sig.last().unwrap(), 1, "{name}: SIGHASH_ALL");
+        let bare = sig[..sig.len() - 1].to_vec();
+        assert_eq!(bare.len(), pq::sig_size(scheme));
+
+        let checker = Mock {
+            lock_time_ok: true,
+            released: selector == 3,
+            expected_pq: Some((scheme, bare.clone(), 1, pk.clone())),
+            ..Mock::default()
+        };
+        assert_eq!(verify(&ss, &code, f, &checker), Ok(true), "{name}");
+        assert_eq!(*checker.pq_calls.borrow(), 1, "{name}");
+        if selector == 3 {
+            released += 1;
+            let hash = checker.last_dormant.borrow().expect("asked");
+            assert!(code.windows(32).any(|w| w == hash.as_slice()));
+            // a live set: OP_VERIFY fails
+            let live = Mock {
+                lock_time_ok: true,
+                released: false,
+                pq_any: true,
+                ..Mock::default()
+            };
+            assert_eq!(
+                verify(&ss, &code, f, &live),
+                Err(ierr(Error::Verify)),
+                "{name}"
+            );
+        } else {
+            // the owner height not reached
+            let early = Mock {
+                lock_time_ok: false,
+                pq_any: true,
+                ..Mock::default()
+            };
+            assert_eq!(
+                verify(&ss, &code, f, &early),
+                Err(ierr(Error::UnsatisfiedLockTime)),
+                "{name}"
+            );
+        }
+        if scheme == pq::SCHEME_FN_DSA_512 {
+            assert_eq!(
+                verify(&ss, &code, flags, &checker),
+                Err(ierr(Error::PqScheme)),
+                "{name}"
+            );
+        }
+        // a signature the checker refuses (another sighash): false, which CleanStack/EvalFalse
+        // turns into a failed spend
+        let refuse = Mock {
+            lock_time_ok: true,
+            released: true,
+            ..Mock::default()
+        };
+        assert_eq!(verify(&ss, &code, f, &refuse), Ok(false), "{name}");
+        // before the upgrade: a bad opcode
+        assert_eq!(
+            verify(&ss, &code, STANDARD | CSV, &checker),
+            Err(ierr(Error::BadOpcode)),
+            "{name}"
+        );
+        // the default checker fails closed
+        assert!(!matches!(
+            verify(&ss, &code, f, &NullSignatureChecker()),
+            Ok(true)
+        ));
+        // two OP_CHECKPQSIG in a V, twenty policy sigops each; none in the consensus count
+        let c = script::Code(code.clone());
+        let expect = if sp["kind"] == "V" { 2 } else { 1 };
+        assert_eq!(c.pq_sig_op_count(), expect * pq::SIGOP_COST, "{name}");
+        assert_eq!(c.sig_op_count(true), 0, "{name}");
+    }
+    assert_eq!((falcon, released), (1, 2));
+}
+
+/// `vault_vectors.json` `vaults[]` and `intents[]`: every template parses, carries no
+/// consensus sigops and the PQ policy sigops of its `OP_CHECKPQSIG`s; a V with an app height
+/// spends by selector 4 (`OP_CHECKLOCKTIMEVERIFY` only) and an I by selector 1
+/// (`OP_CHECKSEQUENCEVERIFY` on its delay).
+#[test]
+fn vault_vector_templates() {
+    let doc = json(VAULT_VECTORS);
+    let flags = STANDARD | CSV | VAULT | FALCON;
+    for v in doc["vaults"].as_array().unwrap() {
+        let name = v["name"].as_str().unwrap();
+        let code = script::Code(hx(&v["script"]));
+        assert!(code.to_component().is_ok(), "{name}");
+        assert_eq!(code.pq_sig_op_count(), 2 * pq::SIGOP_COST, "{name}");
+        assert_eq!(code.sig_op_count(false), 0, "{name}");
+        let app = int(&v["params"]["appHeight"]);
+        let checker = Mock {
+            lock_time_ok: true,
+            ..Mock::default()
+        };
+        let r = verify(&[0x54], &code.0, flags, &checker);
+        if app > 0 {
+            assert_eq!(r, Ok(true), "{name}");
+            let early = Mock::default();
+            assert_eq!(
+                verify(&[0x54], &code.0, flags, &early),
+                Err(ierr(Error::UnsatisfiedLockTime)),
+                "{name}"
+            );
+        } else {
+            // appHeight 0 leaves an empty (false) element: the app path is disabled
+            assert_eq!(r, Ok(false), "{name}");
+        }
+    }
+    for i in doc["intents"].as_array().unwrap() {
+        let name = i["name"].as_str().unwrap();
+        let code = script::Code(hx(&i["script"]));
+        assert_eq!(code.pq_sig_op_count(), pq::SIGOP_COST, "{name}");
+        assert_eq!(code.sig_op_count(false), 0, "{name}");
+        let delay = u32::try_from(int(&i["params"]["delay"])).unwrap();
+        let ok = Mock {
+            sequence: Some((4, delay)),
+            ..Mock::default()
+        };
+        assert_eq!(verify(&[OP_1], &code.0, flags, &ok), Ok(true), "{name}");
+        let early = Mock {
+            sequence: Some((4, delay - 1)),
+            ..Mock::default()
+        };
+        assert_eq!(
+            verify(&[OP_1], &code.0, flags, &early),
+            Err(ierr(Error::UnsatisfiedLockTime)),
+            "{name}"
+        );
+        // without CSV the delay is not enforced (OP_NOP3), but DiscourageUpgradableNOPs refuses
+        assert_eq!(
+            verify(&[OP_1], &code.0, flags - CSV, &early),
+            Err(ierr(Error::DiscourageUpgradableNOPs)),
+            "{name}"
+        );
+    }
+}
+
+/// `pq_vectors.json` `spends[]`: whole TX_PQPKH scriptPubKeys and chunked scriptSigs through the
+/// interpreter, with a mock that accepts exactly the vector's key, signature and hash type
+/// (ycash6 `pq_golden_spends`).
+#[test]
+fn pq_vector_spends() {
+    let doc = json(PQ_VECTORS);
+    let keys = doc["keys"].as_array().unwrap();
+    let spends = doc["spends"].as_array().unwrap();
+    assert_eq!(spends.len(), 2);
+    for sp in spends {
+        let key = &keys[usize::try_from(int(&sp["key"])).unwrap()];
+        let scheme = u8::try_from(int(&sp["scheme"])).unwrap();
+        assert_eq!(int(&key["scheme"]), i64::from(scheme));
+        let spk = hx(&sp["scriptPubKey"]);
+        let ss = hx(&sp["scriptSig"]);
+        let pk = hx(&key["pk"]);
+        let bare = hx(&key["sig"]);
+        let ht = u8::try_from(int(&sp["hashtype"])).unwrap();
+        let mut sig = bare.clone();
+        sig.push(ht);
+        assert_eq!(
+            ss.len(),
+            usize::try_from(int(&sp["scriptSigSize"])).unwrap()
+        );
+        // this file's builders produce the vector's bytes
+        assert_eq!(pqpkh(&hx(&key["keyhash"]), scheme).0, spk);
+        assert_eq!(pq::key_hash(scheme, &pk).to_vec(), hx(&key["keyhash"]));
+        assert_eq!(pq_script_sig(&sig, &pk).0, ss);
+        assert_eq!(
+            chunks(&sig).len(),
+            usize::try_from(int(&sp["sigChunks"])).unwrap()
+        );
+        assert_eq!(
+            chunks(&pk).len(),
+            usize::try_from(int(&sp["pkChunks"])).unwrap()
+        );
+
+        let checker = Mock {
+            expected_pq: Some((scheme, bare.clone(), i32::from(ht), pk.clone())),
+            ..Mock::default()
+        };
+        let all = STANDARD | CSV | VAULT | FALCON;
+        assert_eq!(verify(&ss, &spk, all, &checker), Ok(true));
+        // Falcon is rejected without its flag; SLH-DSA is not
+        let r = verify(&ss, &spk, STANDARD | CSV | VAULT, &checker);
+        if scheme == pq::SCHEME_FN_DSA_512 {
+            assert_eq!(r, Err(ierr(Error::PqScheme)));
+        } else {
+            assert_eq!(r, Ok(true));
+        }
+        assert_eq!(
+            verify(&ss, &spk, STANDARD, &checker),
+            Err(ierr(Error::BadOpcode))
+        );
+        // one bit of the signature (inside the first chunk) is false
+        let mut bad = ss.clone();
+        bad[3 + 100] ^= 0x01;
+        assert_eq!(verify(&bad, &spk, all, &checker), Ok(false));
+        // another message (the mock refuses) is false
+        assert_eq!(verify(&ss, &spk, all, &Mock::default()), Ok(false));
+        // the policy sigops of a TX_PQPKH spend
+        assert_eq!(
+            script::Code(spk.clone()).pq_sig_op_count() + script::Code(ss).pq_sig_op_count(),
+            pq::SIGOP_COST
+        );
+    }
 }

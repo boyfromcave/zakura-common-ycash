@@ -1,0 +1,6 @@
+# Byte-identical copies of two of the C++ lines' cross-line vector files (kogany plan §4.2 rule 4),
+# the script cases W3-a replays against a mock checker. Source: boyfromcave/ycash6 @ 65cb4ae0ff
+# (vaults/kogany-compat), equal to kogany testdata/yellowback/PIN. Never edit; a change is a PIN bump.
+# sha256  path  ycash6-path
+2f7a3ab2fc909bca4772957f15696e8ed5f6feec6914f957e016adf5d0fd7dc8  vault_vectors.json  src/test/data/vault_vectors.json
+1a146175d7815b825a3c961bb41d85a5a3b59ae7f62b468a8550ec5bd1f23be5  pq_vectors.json  src/test/data/pq_vectors.json
