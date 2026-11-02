@@ -22,8 +22,9 @@ name: semgrep
 # run on them. GITHUB_TOKEN also needs "Allow GitHub Actions to create and approve pull requests".
 on:
   push:
-    branches-ignore: ['semgrep/**']
+    branches: ['upgrade/vault', 'vaults/**']
   pull_request:
+    branches: ['upgrade/vault', 'vaults/**', 'kc/**']
   schedule:
     - cron: '17 2 * * *'
   workflow_dispatch:

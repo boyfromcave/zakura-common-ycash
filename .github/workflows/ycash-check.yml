@@ -1,0 +1,97 @@
+# Copyright (c) 2026 The Ycash developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or https://www.opensource.org/licenses/mit-license.php .
+#
+name: ycash-check
+
+# The fork's own check (.github/README-ycash.md "ycash-check.yml"): the trigger policy on every
+# push and pull request, and, when called or dispatched, the `ycash` gate of plan §4.2 rule 8 (the
+# fork's crates tested with the feature off and on). It publishes nothing: no artifact, no
+# release, no cache save. kogany (or any repository) can call it at a fork commit:
+#
+#   uses: boyfromcave/zakura-common-ycash/.github/workflows/ycash-check.yml@<fork commit>
+#   with: { ref: <fork commit>, tests: true }
+#
+# One job per check, no `needs:`: a failed one re-runs alone.
+on:
+  push:
+    branches: [upgrade/vault, "vaults/**"]
+  pull_request:
+    branches: [upgrade/vault, "vaults/**", "kc/**"]
+  workflow_dispatch:
+    inputs:
+      tests:
+        description: 'also run the ycash feature tests (off and on)'
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      ref:
+        description: 'the fork commit to check (empty: this run''s commit)'
+        type: string
+        default: ''
+      tests:
+        description: 'also run the ycash feature tests (off and on)'
+        type: boolean
+        default: true
+
+permissions: {}
+
+concurrency:
+  group: ycash-check-${{ github.event_name }}-${{ github.ref }}-${{ inputs.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  CARGO_INCREMENTAL: '0'
+  CARGO_TERM_COLOR: always
+
+jobs:
+  workflow-triggers:
+    name: workflow triggers
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: boyfromcave/zakura-common-ycash
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - name: the policy's tests
+        run: python3 -m unittest discover -s .github/scripts -p 'test_check_workflow_triggers.py'
+      - name: every workflow in .github/workflows keeps to the policy
+        run: python3 .github/scripts/check_workflow_triggers.py
+
+  ycash-tests:
+    name: ycash feature ${{ matrix.ycash }}
+    # Only when called or dispatched (inputs.tests); on a push or pull request ci.yml's
+    # librustzcash-test runs the same legs.
+    if: ${{ inputs.tests }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        ycash: ['off', 'on']
+    env:
+      RAYON_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: boyfromcave/zakura-common-ycash
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - name: cargo test (ycash feature ${{ matrix.ycash }})
+        env:
+          YCASH: ${{ matrix.ycash }}
+        run: |
+          features=()
+          if [ "$YCASH" = on ]; then
+            features=(--features "zakura-protocol/ycash,zakura-address/ycash,zakura-transparent/ycash,zakura-primitives/ycash")
+          fi
+          cargo +1.97.0 test --locked -p zakura-protocol -p zakura-address -p zakura-transparent \
+            -p zakura-primitives -p zakura-zcash-script "${features[@]}" -- --test-threads=2

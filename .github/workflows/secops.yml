@@ -28,8 +28,9 @@ name: secops
 # (the default branch), workflow_dispatch.
 on:
   push:
-    branches: ['upgrade/vault', 'vaults/kogany-compat']
+    branches: ['upgrade/vault', 'vaults/**']
   pull_request:
+    branches: ['upgrade/vault', 'vaults/**', 'kc/**']
   schedule:
     - cron: '43 3 * * *'
   workflow_dispatch:
