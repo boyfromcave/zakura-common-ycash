@@ -500,6 +500,8 @@ impl Operation {
             {
                 Err(vec![interpreter::Error::DiscourageUpgradableNOPs])
             }
+            // Ycash: OP_NOP3 is OP_CHECKSEQUENCEVERIFY under the flag.
+            Self::OP_NOP3 if flags.contains(interpreter::Flags::CHECKSEQUENCEVERIFY) => Ok(()),
             Self::OP_NOP1
             | Self::OP_NOP3
             | Self::OP_NOP4
@@ -735,6 +737,11 @@ impl Operation {
                 } else {
                     Ok(())
                 }
+            }
+
+            // (seq -- seq): Ycash's OP_CHECKSEQUENCEVERIFY (BIP112, height only), see `vault`.
+            Self::OP_NOP3 if flags.contains(interpreter::Flags::CHECKSEQUENCEVERIFY) => {
+                crate::vault::eval_check_sequence_verify(require_minimal, &state.stack, checker)
             }
 
             Self::OP_NOP1
@@ -1306,6 +1313,13 @@ impl Evaluable for PossiblyBad {
         state: interpreter::State,
     ) -> Result<interpreter::State, interpreter::Error> {
         match self {
+            // Ycash: 0xc0–0xc2 stay bad opcodes unless the vault flag is set, see `vault`.
+            Self::Bad(Bad::Unknown(b)) if flags.contains(interpreter::Flags::Vault) => {
+                match crate::vault::VaultOp::decode(*b) {
+                    Some(op) => crate::vault::eval(op, flags, script, checker, state),
+                    None => Bad::Unknown(*b).eval(state),
+                }
+            }
             Self::Bad(bad) => bad.eval(state),
             Self::Good(opcode) => opcode.eval(flags, script, checker, state),
         }

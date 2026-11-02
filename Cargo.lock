@@ -3752,6 +3752,7 @@ dependencies = [
  "lazy_static",
  "ripemd 0.1.3",
  "secp256k1",
+ "serde_json",
  "sha1",
  "sha2 0.10.9",
  "thiserror",
