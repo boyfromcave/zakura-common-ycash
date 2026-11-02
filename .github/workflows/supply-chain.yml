@@ -2,7 +2,8 @@ name: Supply chain
 
 on:
   pull_request:
-    branches: [main, "feat/**", "release/**", "agent/**"]
+    # zakura-common-ycash (2026-11-01): also the fork's branches (.github/README-ycash.md).
+    branches: [main, "feat/**", "release/**", "agent/**", "upgrade/vault", "vaults/**"]
     paths:
       - "**/*.rs"
       - "**/Cargo.toml"
@@ -15,6 +16,8 @@ on:
   push:
     branches:
       - main
+      - upgrade/vault
+      - vaults/kogany-compat
     paths:
       - "**/*.rs"
       - "**/Cargo.toml"

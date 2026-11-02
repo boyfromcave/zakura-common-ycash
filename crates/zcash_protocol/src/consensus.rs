@@ -577,16 +577,18 @@ impl Parameters for TestNetwork {
         }
     }
 
-    /// Ycash testnet (`ycashd` `src/chainparams.cpp`, `CTestNetParams`).
+    /// Ycash testnet (`ycashd` `src/chainparams.cpp`, `CTestNetParams`): the
+    /// re-forked testnet, where Blossom, Heartwood and Canopy follow the Ycash
+    /// fork block at once, two blocks per epoch.
     #[cfg(feature = "ycash")]
     fn activation_height(&self, nu: NetworkUpgrade) -> Option<BlockHeight> {
         match nu {
             NetworkUpgrade::Overwinter => Some(BlockHeight(207_500)),
             NetworkUpgrade::Sapling => Some(BlockHeight(280_000)),
             NetworkUpgrade::Ycash => Some(BlockHeight(510_248)),
-            NetworkUpgrade::Blossom => Some(BlockHeight(661_610)),
-            NetworkUpgrade::Heartwood => Some(BlockHeight(661_622)),
-            NetworkUpgrade::Canopy => Some(BlockHeight(661_634)),
+            NetworkUpgrade::Blossom => Some(BlockHeight(510_250)),
+            NetworkUpgrade::Heartwood => Some(BlockHeight(510_252)),
+            NetworkUpgrade::Canopy => Some(BlockHeight(510_254)),
             NetworkUpgrade::Vault => None,
             NetworkUpgrade::Nu5
             | NetworkUpgrade::Nu6
@@ -1449,6 +1451,54 @@ mod tests {
         assert_eq!(super::ZIP212_GRACE_PERIOD, 3);
     }
 
+    /// The activation heights equal `ycashd`'s (`src/chainparams.cpp`,
+    /// `CMainParams` 122-138 and `CTestNetParams` 429-448, at ycash6 65cb4ae0f):
+    /// every scheduled upgrade of both networks, and nothing after Canopy.
+    /// The testnet rows are the re-forked testnet's (Blossom, Heartwood and
+    /// Canopy at 510,250 / 510,252 / 510,254), not the old Ycash testnet's
+    /// 661,610 / 661,622 / 661,634.
+    #[test]
+    #[cfg(feature = "ycash")]
+    fn ycash_activation_heights_match_ycashd() {
+        let table = [
+            (
+                Network::MainNetwork,
+                [
+                    (NetworkUpgrade::Overwinter, 347_500),
+                    (NetworkUpgrade::Sapling, 419_200),
+                    (NetworkUpgrade::Ycash, 570_000),
+                    (NetworkUpgrade::Blossom, 1_100_000),
+                    (NetworkUpgrade::Heartwood, 1_100_003),
+                    (NetworkUpgrade::Canopy, 1_100_006),
+                ],
+            ),
+            (
+                Network::TestNetwork,
+                [
+                    (NetworkUpgrade::Overwinter, 207_500),
+                    (NetworkUpgrade::Sapling, 280_000),
+                    (NetworkUpgrade::Ycash, 510_248),
+                    (NetworkUpgrade::Blossom, 510_250),
+                    (NetworkUpgrade::Heartwood, 510_252),
+                    (NetworkUpgrade::Canopy, 510_254),
+                ],
+            ),
+        ];
+        for (network, rows) in table {
+            for (nu, height) in rows {
+                assert_eq!(
+                    network.activation_height(nu),
+                    Some(BlockHeight(height)),
+                    "{network:?} {nu:?}"
+                );
+            }
+        }
+        assert_ne!(
+            TEST_NETWORK.activation_height(NetworkUpgrade::Blossom),
+            Some(BlockHeight(661_610))
+        );
+    }
+
     /// Every height band of Ycash mainnet and testnet (`ycashd`
     /// `src/chainparams.cpp`); no upgrade after Canopy is scheduled.
     #[test]
@@ -1465,7 +1515,7 @@ mod tests {
             ),
             (
                 Network::TestNetwork,
-                [207_500, 280_000, 510_248, 661_610, 661_622, 661_634],
+                [207_500, 280_000, 510_248, 510_250, 510_252, 510_254],
             ),
         ];
         let branches = [

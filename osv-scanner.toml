@@ -1,0 +1,91 @@
+# Copyright (c) 2026 The Ycash developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or https://www.opensource.org/licenses/mit-license.php .
+#
+# OSV-Scanner accepted vulnerabilities (the `osv-scanner` job of .github/workflows/secops.yml;
+# .github/README-ycash.md "Security CI"). Every entry has a reason and an ignoreUntil at most 90 days
+# out: on that date the finding fails the scan again and is re-triaged. Triaged 2026-11-01.
+#
+# Common to every entry: the fork's Cargo.lock is upstream zakura-core/common's at the base
+# bdbca121628d (the fork adds only its own crates' version suffix and one dev-dependency edge,
+# serde_json, already in the lock) and serves only the fork's own CI. kogany consumes the fork's
+# crates through its own Cargo.lock, which resolves and scans its own versions: there ctutils is
+# 0.4.6, rustls 0.23.46 and tokio 1.53.3 (past every fix below), and frost-core, minreq,
+# quick-xml and ttf-parser are absent. A lock bump here comes with the next upstream sync or as
+# its own reviewed commit. The cargo-deny leg's ignores (contrib/secops/deny-fork.toml) are the
+# subset its default graph reaches, with the same reasons.
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2023-0089"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "atomic-polyfill 1.0.3 (unmaintained, no advisory against its code): only via heapless/postcard/frost-core in zakura-reddsa-frost, a FROST crate kogany does not depend on."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2025-0141"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "bincode 1.3.3 (unmaintained, no advisory against its code): a dev-dependency of the pasta/reddsa/redjubjub test suites, never built into a library."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0385"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "ctutils 0.4.3 (non-constant-time mask generation and u128 comparisons; fixed in 0.4.4): reached through digest/hmac (bip32 in zakura-transparent's wallet derivation) and poly1305 (note encryption). Not shipped from this lock: kogany's own lock has ctutils 0.4.6, past the fix."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0436"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "paste 1.0.15 (unmaintained, no advisory against its code): via image/exr/pulp, a dev-dependency of zakura-halo2-proofs' circuit-layout tooling."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0194"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "quick-xml 0.26.0 (quadratic duplicate-attribute check): via inferno/pprof, a dev-dependency (benchmark profiling) of halo2/orchard/primitives/sapling; parses only flamegraph XML the benchmarks produce."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0195"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "quick-xml 0.26.0 (NsReader namespace allocation): the same dev-only pprof/inferno path as RUSTSEC-2026-0194."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0346"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls 0.21.12: via minreq, only under zakura-proofs' optional `download-params` feature (fetching the Sapling parameters over HTTPS, checked against pinned hashes); kogany does not enable it."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0349"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls 0.21.12: the same optional zakura-proofs `download-params` path as RUSTSEC-2026-0346."
+
+[[IgnoredVulns]]
+id = "GHSA-h2v8-394m-p7vv"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls 0.21.12: the same optional zakura-proofs `download-params` path as RUSTSEC-2026-0346."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0098"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls-webpki 0.101.7: the same optional zakura-proofs `download-params` path (minreq/rustls)."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0099"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls-webpki 0.101.7: the same optional zakura-proofs `download-params` path (minreq/rustls)."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0104"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "rustls-webpki 0.101.7: the same optional zakura-proofs `download-params` path (minreq/rustls)."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0381"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "webpki-roots 0.25.4: the same optional zakura-proofs `download-params` path (minreq)."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0386"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "tokio 1.53.1 (AsyncFd safe constructors violate I/O safety; fixed in 1.53.3): only via frost-core in zakura-reddsa-frost, a crate kogany does not depend on; no AsyncFd use."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0192"
+ignoreUntil = 2027-01-29T00:00:00Z
+reason = "ttf-parser 0.20.0: via plotters, used by criterion benchmarks and halo2's optional `dev-graph` circuit plotting; parses only bundled fonts, never network input."

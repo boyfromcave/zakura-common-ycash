@@ -1,3 +1,7 @@
+# zakura-common-ycash (2026-11-01): security updates only (.github/README-ycash.md). Version
+# updates are off in every ecosystem (open-pull-requests-limit: 0): the fork's dependencies move
+# with an upstream sync or a reviewed commit. Security updates (a separate limit) open once
+# "Dependabot security updates" is enabled in Settings -> Code security.
 version: 2
 
 updates:
@@ -24,7 +28,8 @@ updates:
       timezone: America/New_York
     cooldown:
       default-days: 7
-    open-pull-requests-limit: 4
+    # zakura-common-ycash (2026-11-01): security updates only (was: 4 open version-update PRs).
+    open-pull-requests-limit: 0
     labels:
       - dependencies
     groups:
@@ -41,6 +46,7 @@ updates:
       timezone: America/New_York
     cooldown:
       default-days: 7
-    open-pull-requests-limit: 4
+    # zakura-common-ycash (2026-11-01): security updates only (was: 4 open version-update PRs).
+    open-pull-requests-limit: 0
     labels:
       - dependencies
