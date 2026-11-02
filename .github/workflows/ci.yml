@@ -11,11 +11,14 @@ on:
   # Allow maintainers to toggle the ci-backfill label when an unchanged PR
   # needs a fresh required test success check.
   pull_request:
-    branches: [main, "feat/**", "perf/**", "release/**", "agent/**"]
+    # zakura-common-ycash (2026-11-01): also the fork's branches (.github/README-ycash.md).
+    branches: [main, "feat/**", "perf/**", "release/**", "agent/**", "upgrade/vault", "vaults/**"]
     types: [opened, synchronize, reopened, labeled, unlabeled]
   push:
     branches:
       - main
+      - upgrade/vault
+      - vaults/kogany-compat
   merge_group:
 
 permissions:
@@ -371,6 +374,15 @@ jobs:
         run: >-
           bash .github/scripts/check_rust_group.sh
           "zakura-keys zakura-note-encryption zakura-primitives zakura-protocol zakura-proofs zakura-zip321" true false
+      # zakura-common-ycash (2026-11-01): the same checks with the fork's `ycash`
+      # feature on, for the crates that carry it (.github/README-ycash.md).
+      - name: librustzcash / ycash feature checks
+        if: ${{ !cancelled() && matrix.group == 'Sapling and librustzcash' && needs.changes.outputs.librustzcash == 'true' }}
+        env:
+          YCASH_FEATURE: "on"
+        run: >-
+          bash .github/scripts/check_rust_group.sh
+          "zakura-address zakura-primitives zakura-protocol zakura-transparent" true false
 
       - name: Udon and Bento / Stable and MSRV checks
         if: ${{ !cancelled() && matrix.group == 'Udon and equihash' && needs.changes.outputs.udon == 'true' }}
@@ -1360,10 +1372,19 @@ jobs:
         include:
           - configuration: default
             rustflags: ""
+            ycash: "off"
           - configuration: nu7
             rustflags: '--cfg zcash_unstable="nu7"'
+            ycash: "off"
+          # zakura-common-ycash (2026-11-01): the fork's `ycash` feature on
+          # (Ycash consensus parameters); the two legs above are upstream's
+          # Zcash build with it off (.github/README-ycash.md).
+          - configuration: ycash
+            rustflags: ""
+            ycash: "on"
     env:
       RUSTFLAGS: ${{ matrix.rustflags }}
+      YCASH_FEATURE: ${{ matrix.ycash }}
       CARGO_PROFILE_TEST_DEBUG: 1
       RAYON_NUM_THREADS: 2
     steps:
@@ -1372,6 +1393,8 @@ jobs:
           persist-credentials: false
       - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
       - name: Run tests
+        # zakura-common-ycash (2026-11-01): upstream's step, on the feature-off legs.
+        if: matrix.ycash != 'on'
         run: >-
           cargo +1.97.0 test
           -p zakura-address
@@ -1383,6 +1406,23 @@ jobs:
           -p zakura-zcash-script
           -p zakura-zip321
           --features "$(python3 .github/scripts/supported_features.py zakura-address zakura-keys zakura-primitives zakura-protocol zakura-proofs zakura-transparent zakura-zcash-script zakura-zip321)"
+          -- --test-threads=2
+      # zakura-common-ycash (2026-11-01): the `ycash` leg tests the crates that
+      # carry the feature and zakura-zcash-script, default features plus
+      # `ycash`. zakura-keys, -proofs and -zip321 have no `ycash` feature, and
+      # their tests (and zakura-transparent's wallet-feature tests: bip32,
+      # zip48, the builder) pin Zcash encodings and coin type 133, so they
+      # run on the feature-off legs only (.github/README-ycash.md).
+      - name: Run tests (ycash)
+        if: matrix.ycash == 'on'
+        run: >-
+          cargo +1.97.0 test
+          -p zakura-address
+          -p zakura-primitives
+          -p zakura-protocol
+          -p zakura-transparent
+          -p zakura-zcash-script
+          --features zakura-protocol/ycash,zakura-address/ycash,zakura-transparent/ycash,zakura-primitives/ycash
           -- --test-threads=2
       - name: Verify working directory is clean
         run: git diff --exit-code

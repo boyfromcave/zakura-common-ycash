@@ -1,0 +1,9 @@
+# gitleaks configuration (the `gitleaks` job of .github/workflows/secops.yml; .github/README-ycash.md).
+# The default rule set, plus one path allowlist. Individual accepted findings live in
+# .gitleaksignore, each under a reason.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Cross-line golden vectors pinned byte for byte from ycash6 (crates/zcash_script/testdata/yellowback/, SHA-256 in its PIN): fixed regtest/test keys, signatures and hashes; never keys of a live network."
+paths = ['''^crates/zcash_script/testdata/yellowback/[^/]+\.json$''']

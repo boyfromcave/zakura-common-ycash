@@ -1,0 +1,8 @@
+# actionlint configuration for zakura-common-ycash (.github/README-ycash.md).
+paths:
+  .github/workflows/ci.yml:
+    ignore:
+      # Upstream zakura-core/common turns six Sensei/Udon jobs off with `if: false` (each with its
+      # own note in ci.yml). The lines stay as upstream wrote them so an upstream sync never
+      # conflicts on them.
+      - 'constant expression "false" in condition'
