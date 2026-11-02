@@ -14,9 +14,10 @@ Yellowback workspace).
 
 | State | Workflows | What changed |
 | --- | --- | --- |
-| kept | `ci.yml` | triggers widened to the fork's branches; a `ycash` leg in `librustzcash-test` and a `ycash` lint step in `rust-checks` |
-| kept | `docs.yml`, `supply-chain.yml`, `workflow-security.yml` | triggers widened to the fork's branches |
+| kept | `ci.yml` | triggers narrowed to the fork's branches (Triggers below); a `ycash` leg in `librustzcash-test` and a `ycash` lint step in `rust-checks` |
+| kept | `docs.yml`, `supply-chain.yml`, `workflow-security.yml` | triggers narrowed to the fork's branches |
 | fork | `semgrep.yml`, `codeql.yml`, `secops.yml` | ours (Security CI below) |
+| fork | `ycash-check.yml` | ours: the trigger policy, and the `ycash` gate when called or dispatched |
 | off | `publish-crates.yml`, `semver.yml`, `changelog.yml`, `maintenance.yml` | moved, byte for byte, to `.github/workflows-off/` |
 
 Every edit to a kept workflow or script carries a `zakura-common-ycash (2026-11-01)` comment.
@@ -54,17 +55,42 @@ cargo test -p zakura-protocol -p zakura-address -p zakura-transparent -p zakura-
 
 ### Triggers
 
-The kept workflows run on pull requests into `upgrade/vault` and `vaults/**`, and on pushes to
-`upgrade/vault` and `vaults/kogany-compat`, as well as upstream's own branches. `ci.yml` has no
-`workflow_dispatch`, because its path filter supports only pull request, push and merge-queue
-events. Scheduled runs (the nightly `supply-chain.yml`, `semgrep.yml` and `secops.yml`, and the
-weekly `codeql.yml`) run from the default branch. They start doing useful work once the
-repository's default branch is `upgrade/vault`.
+The Yellowback lead architect's rule (2026-11-01): nothing runs for a branch that is not the
+fork's, and nothing upstream's release or maintenance machinery would start. Every file in
+`.github/workflows/` keeps to this policy, and `ycash-check.yml`'s `workflow triggers` job
+(`.github/scripts/check_workflow_triggers.py`, the reader and policy of kogany's
+`qa/kogany_audit.py` `workflows` leg; tests in `test_check_workflow_triggers.py`) fails when one
+does not:
+
+| Event | Allowed |
+| --- | --- |
+| `push` | only with a `branches:` filter within `upgrade/vault` and `vaults/**`; no `branches-ignore`, no tags |
+| `pull_request` | only with a `branches:` filter (the base) within `upgrade/vault`, `vaults/**` and `kc/**` |
+| `schedule` | yes (GitHub runs it from the default branch, `upgrade/vault`, only) |
+| `workflow_dispatch`, `workflow_call` | yes |
+| anything else | no: no `create`, `delete`, `merge_group`, `pull_request_target`, `workflow_run` |
+
+So upstream's `main`, `feat/**`, `perf/**`, `release/**` and `agent/**` triggers and the merge
+queue are commented out in the kept workflows, each with a `zakura-common-ycash (2026-11-01)`
+comment, and `semgrep.yml` no longer runs on pushes to every branch. A push to an agent branch
+or an inherited upstream branch, or a branch deletion, starts nothing. `ci.yml` has no
+`workflow_dispatch`, because its path filter supports only pull request and push events;
+`ycash-check.yml` is the dispatchable check. Scheduled runs (the nightly `supply-chain.yml`,
+`semgrep.yml` and `secops.yml`, and the weekly `codeql.yml`) start doing useful work once the
+default branch, `upgrade/vault`, carries these files.
+
+### `ycash-check.yml`
+
+The fork's own workflow, callable from kogany (`workflow_call`, inputs `ref` and `tests`) and
+dispatchable; it publishes nothing (no artifact, release or cache save). Two independent jobs, so
+either re-runs alone: `workflow triggers` (every push and pull request; seconds) and
+`ycash feature off` / `ycash feature on` (only when called or dispatched with `tests`: the local
+gate above, about 10 minutes each; on pushes and pull requests `ci.yml`'s `librustzcash-test`
+runs the same legs).
 
 ## Why the off workflows are moved, not disabled in the settings
 
-kogany keeps its off workflows byte for byte in `.github/workflows/` and disables them in the
-repository's Actions settings. The fork uses a mechanism in the tree instead: GitHub runs only
+kogany now uses the same mechanism (since 2026-11-02, its `.github/README-kogany.md`): GitHub runs only
 files under `.github/workflows/`, so a file under `.github/workflows-off/` cannot run, whatever
 the settings say. The fork's settings are not ours to change in this change, and the fork must be
 safe whatever they are. The moved files are unchanged, so git's rename detection carries an
@@ -116,3 +142,7 @@ Do this when the Yellowback lead architect decides to:
    updates. For `semgrep.yml`'s `sync` job, allow GitHub Actions to create pull requests
    (optionally with the `SEMGREP_PR_TOKEN` secret, see `contrib/semgrep/README.md`).
 2. Set the default branch to `upgrade/vault` before relying on any scheduled run.
+3. Nothing has to be disabled: the off set lives in `.github/workflows-off/`, and every other
+   workflow triggers only on the fork's branches (Triggers above).
+4. Rulesets on `vaults/kogany-compat` and `upgrade/vault`, after the first green run: require
+   `workflow triggers`, `ci.yml`'s `test-success`, and the security checks.

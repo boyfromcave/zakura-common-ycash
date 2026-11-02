@@ -19,8 +19,9 @@ name: codeql
 #   introduces.
 on:
   push:
-    branches: ['upgrade/vault', 'vaults/kogany-compat']
+    branches: ['upgrade/vault', 'vaults/**']
   pull_request:
+    branches: ['upgrade/vault', 'vaults/**', 'kc/**']
   schedule:
     - cron: '41 4 * * 1'
   workflow_dispatch:
