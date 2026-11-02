@@ -51,6 +51,12 @@ test-dependencies = [
 ## Exposes support for working with a local consensus (e.g. regtest).
 local-consensus = []
 
+## Ycash: Ycash's activation heights, its branch IDs for Blossom, Heartwood,
+## Canopy and NU5, its address prefixes, HRPs and coin type, and its ZIP 212
+## grace period. Without it the crate keeps Zcash's values and the Ycash
+## upgrade is an unscheduled, inert variant.
+ycash = []
+
 [lints.rust.unexpected_cfgs]
 level = "warn"
 priority = 0

@@ -36,6 +36,8 @@ std = [
     "zcash_protocol/std",
 ]
 test-dependencies = ["dep:proptest"]
+## Ycash consensus parameters and address encodings (see zakura-protocol's `ycash`).
+ycash = ["zcash_protocol/ycash"]
 
 [lib]
 name = "zcash_address"

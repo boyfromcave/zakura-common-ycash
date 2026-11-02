@@ -91,7 +91,9 @@ members = [
 ]
 
 [workspace.package]
-version = "5.0.0-rc.2"
+# Ycash: upstream's version with build metadata naming the Ycash fork
+# (Yellowback plan section 4.2 rule 8), so a consumer's Cargo.lock shows it.
+version = "5.0.0-rc.2+ycash.1"
 authors = [
     "Dev Ojha <ValarDragon@users.noreply.github.com>",
     "Sean Bowe <ewillbefull@gmail.com>",

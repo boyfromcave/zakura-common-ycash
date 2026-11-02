@@ -3,7 +3,11 @@
 /// The mainnet coin type for ZEC, as defined by [SLIP 44].
 ///
 /// [SLIP 44]: https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+#[cfg(not(feature = "ycash"))]
 pub const COIN_TYPE: u32 = 133;
+/// Ycash: YEC, SLIP 44 coin type 347 (`ycashd` `src/chainparams.cpp`, `bip44CoinType`).
+#[cfg(feature = "ycash")]
+pub const COIN_TYPE: u32 = 347;
 
 /// The HRP for a Bech32-encoded mainnet Sapling [`ExtendedSpendingKey`].
 ///
@@ -27,14 +31,22 @@ pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviews";
 ///
 /// [`PaymentAddress`]: https://docs.rs/sapling-crypto/latest/sapling_crypto/struct.PaymentAddress.html
 /// [Zcash Protocol Specification]: https://github.com/zcash/zips/blob/main/rendered/protocol/protocol.pdf
+#[cfg(not(feature = "ycash"))]
 pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "zs";
+/// Ycash: `ycashd` `src/chainparams.cpp`, `SAPLING_PAYMENT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "ys";
 
 /// The prefix for a Base58Check-encoded mainnet Sprout address.
 ///
 /// Defined in the [Zcash Protocol Specification section 5.6.3][sproutpaymentaddrencoding].
 ///
 /// [sproutpaymentaddrencoding]: https://zips.z.cash/protocol/protocol.pdf#sproutpaymentaddrencoding
+#[cfg(not(feature = "ycash"))]
 pub const B58_SPROUT_ADDRESS_PREFIX: [u8; 2] = [0x16, 0x9a];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `ZCPAYMENT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_SPROUT_ADDRESS_PREFIX: [u8; 2] = [0x16, 0x36];
 
 /// The prefix for a Base58Check-encoded DER-encoded mainnet [`SecretKey`], as specified via the
 /// bitcoin-derived [`EncodeSecret`] format function.
@@ -46,12 +58,20 @@ pub const B58_SECRET_KEY_PREFIX: [u8; 1] = [0x80];
 /// The prefix for a Base58Check-encoded mainnet [`PublicKeyHash`].
 ///
 /// [`PublicKeyHash`]: https://docs.rs/zcash_transparent/latest/zcash_transparent/address/enum.TransparentAddress.html
+#[cfg(not(feature = "ycash"))]
 pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0xb8];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `PUBKEY_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0x28];
 
 /// The prefix for a Base58Check-encoded mainnet [`ScriptHash`].
 ///
 /// [`ScriptHash`]: https://docs.rs/zcash_transparent/latest/zcash_transparent/address/enum.TransparentAddress.html
+#[cfg(not(feature = "ycash"))]
 pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0xbd];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `SCRIPT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0x2c];
 
 /// The HRP for a Bech32m-encoded mainnet [ZIP 320] TEX address.
 ///
