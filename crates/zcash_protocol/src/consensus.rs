@@ -513,6 +513,7 @@ impl Parameters for MainNetwork {
             NetworkUpgrade::Blossom => Some(BlockHeight(653_600)),
             NetworkUpgrade::Heartwood => Some(BlockHeight(903_000)),
             NetworkUpgrade::Canopy => Some(BlockHeight(1_046_400)),
+            NetworkUpgrade::Vault => None,
             NetworkUpgrade::Nu5 => Some(BlockHeight(1_687_104)),
             NetworkUpgrade::Nu6 => Some(BlockHeight(2_726_400)),
             NetworkUpgrade::Nu6_1 => Some(BlockHeight(3_146_400)),
@@ -533,6 +534,8 @@ impl Parameters for MainNetwork {
             NetworkUpgrade::Blossom => Some(BlockHeight(1_100_000)),
             NetworkUpgrade::Heartwood => Some(BlockHeight(1_100_003)),
             NetworkUpgrade::Canopy => Some(BlockHeight(1_100_006)),
+            // The vault upgrade: no public activation height is set yet.
+            NetworkUpgrade::Vault => None,
             NetworkUpgrade::Nu5
             | NetworkUpgrade::Nu6
             | NetworkUpgrade::Nu6_1
@@ -564,6 +567,7 @@ impl Parameters for TestNetwork {
             NetworkUpgrade::Blossom => Some(BlockHeight(584_000)),
             NetworkUpgrade::Heartwood => Some(BlockHeight(903_800)),
             NetworkUpgrade::Canopy => Some(BlockHeight(1_028_500)),
+            NetworkUpgrade::Vault => None,
             NetworkUpgrade::Nu5 => Some(BlockHeight(1_842_420)),
             NetworkUpgrade::Nu6 => Some(BlockHeight(2_976_000)),
             NetworkUpgrade::Nu6_1 => Some(BlockHeight(3_536_500)),
@@ -583,6 +587,7 @@ impl Parameters for TestNetwork {
             NetworkUpgrade::Blossom => Some(BlockHeight(661_610)),
             NetworkUpgrade::Heartwood => Some(BlockHeight(661_622)),
             NetworkUpgrade::Canopy => Some(BlockHeight(661_634)),
+            NetworkUpgrade::Vault => None,
             NetworkUpgrade::Nu5
             | NetworkUpgrade::Nu6
             | NetworkUpgrade::Nu6_1
@@ -650,6 +655,14 @@ pub enum NetworkUpgrade {
     ///
     /// [Canopy]: https://z.cash/upgrade/canopy/
     Canopy,
+    /// The Ycash Vault network upgrade: the vault lock/unlock primitive
+    /// (`ycashd` `UPGRADE_VAULT`, branch ID `0x6d5b7a31`).
+    ///
+    /// Ordered before [`NetworkUpgrade::Nu5`] (Yellowback plan K-1): Ycash
+    /// activates it on a Canopy-era chain, so every "at or after NU5" gate
+    /// reads as before NU5 under it. A v4-only, Sapling-era epoch. It has no
+    /// height on any public network; local networks schedule it.
+    Vault,
     /// The [Nu5] network upgrade.
     ///
     /// [Nu5]: https://z.cash/upgrade/nu5/
@@ -683,6 +696,7 @@ impl fmt::Display for NetworkUpgrade {
             NetworkUpgrade::Blossom => write!(f, "Blossom"),
             NetworkUpgrade::Heartwood => write!(f, "Heartwood"),
             NetworkUpgrade::Canopy => write!(f, "Canopy"),
+            NetworkUpgrade::Vault => write!(f, "Vault"),
             NetworkUpgrade::Nu5 => write!(f, "Nu5"),
             NetworkUpgrade::Nu6 => write!(f, "Nu6"),
             NetworkUpgrade::Nu6_1 => write!(f, "Nu6.1"),
@@ -705,6 +719,7 @@ impl NetworkUpgrade {
             NetworkUpgrade::Blossom => BranchId::Blossom,
             NetworkUpgrade::Heartwood => BranchId::Heartwood,
             NetworkUpgrade::Canopy => BranchId::Canopy,
+            NetworkUpgrade::Vault => BranchId::Vault,
             NetworkUpgrade::Nu5 => BranchId::Nu5,
             NetworkUpgrade::Nu6 => BranchId::Nu6,
             NetworkUpgrade::Nu6_1 => BranchId::Nu6_1,
@@ -726,6 +741,7 @@ const UPGRADES_IN_ORDER: &[NetworkUpgrade] = &[
     NetworkUpgrade::Blossom,
     NetworkUpgrade::Heartwood,
     NetworkUpgrade::Canopy,
+    NetworkUpgrade::Vault,
     NetworkUpgrade::Nu5,
     NetworkUpgrade::Nu6,
     NetworkUpgrade::Nu6_1,
@@ -785,6 +801,8 @@ pub enum BranchId {
     Heartwood,
     /// The consensus rules deployed by [`NetworkUpgrade::Canopy`].
     Canopy,
+    /// The consensus rules deployed by [`NetworkUpgrade::Vault`].
+    Vault,
     /// The consensus rules deployed by [`NetworkUpgrade::Nu5`].
     Nu5,
     /// The consensus rules deployed by [`NetworkUpgrade::Nu6`].
@@ -804,6 +822,10 @@ const NU7_BRANCH_ID: u32 = 0x7719_0ad9;
 /// Ycash's fork upgrade (`ycashd` `src/consensus/upgrades.cpp`). Recognised in
 /// every build; no Zcash network schedules it.
 const YCASH_BRANCH_ID: u32 = 0x374d_694f;
+
+/// Ycash's vault upgrade (`ycashd` `UPGRADE_VAULT`, Yellowback upgrade plan).
+/// Recognised in every build; no public network schedules it.
+const VAULT_BRANCH_ID: u32 = 0x6d5b_7a31;
 
 // Ycash gave the upgrades after its fork their own branch IDs
 // (`ycashd` `src/consensus/upgrades.cpp`); Overwinter, Sapling and NU6 onward
@@ -837,6 +859,7 @@ impl TryFrom<u32> for BranchId {
             BLOSSOM_BRANCH_ID => Ok(BranchId::Blossom),
             HEARTWOOD_BRANCH_ID => Ok(BranchId::Heartwood),
             CANOPY_BRANCH_ID => Ok(BranchId::Canopy),
+            VAULT_BRANCH_ID => Ok(BranchId::Vault),
             NU5_BRANCH_ID => Ok(BranchId::Nu5),
             0xc8e7_1055 => Ok(BranchId::Nu6),
             0x4dec_4df0 => Ok(BranchId::Nu6_1),
@@ -858,6 +881,7 @@ impl From<BranchId> for u32 {
             BranchId::Blossom => BLOSSOM_BRANCH_ID,
             BranchId::Heartwood => HEARTWOOD_BRANCH_ID,
             BranchId::Canopy => CANOPY_BRANCH_ID,
+            BranchId::Vault => VAULT_BRANCH_ID,
             BranchId::Nu5 => NU5_BRANCH_ID,
             BranchId::Nu6 => 0xc8e7_1055,
             BranchId::Nu6_1 => 0x4dec_4df0,
@@ -897,6 +921,7 @@ impl BranchId {
             BranchId::Blossom => NetworkUpgrade::Blossom,
             BranchId::Heartwood => NetworkUpgrade::Heartwood,
             BranchId::Canopy => NetworkUpgrade::Canopy,
+            BranchId::Vault => NetworkUpgrade::Vault,
             BranchId::Nu5 => NetworkUpgrade::Nu5,
             BranchId::Nu6 => NetworkUpgrade::Nu6,
             BranchId::Nu6_1 => NetworkUpgrade::Nu6_1,
@@ -955,8 +980,8 @@ impl BranchId {
     pub fn has_sprout(&self) -> bool {
         use BranchId::*;
         match self {
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Nu5 | Nu6
-            | Nu6_1 | Nu6_2 => true,
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | Nu5
+            | Nu6 | Nu6_1 | Nu6_2 => true,
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => false,
         }
@@ -967,7 +992,9 @@ impl BranchId {
         use BranchId::*;
         match self {
             Sprout | Overwinter => false,
-            Sapling | Ycash | Blossom | Heartwood | Canopy | Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
+            Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => {
+                true
+            }
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => true,
         }
@@ -977,7 +1004,8 @@ impl BranchId {
     pub fn has_orchard(&self) -> bool {
         use BranchId::*;
         match self {
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy => false,
+            // Vault: a Sapling-era (v4) epoch on Ycash, without Orchard.
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault => false,
             Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => true,
@@ -990,7 +1018,7 @@ impl BranchId {
     pub fn orchard_protocol_revision(&self) -> Option<OrchardProtocolRevision> {
         use BranchId::*;
         match self {
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy => None,
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault => None,
             Nu5 | Nu6 | Nu6_1 => Some(OrchardProtocolRevision::InsecureV1),
             Nu6_2 => Some(OrchardProtocolRevision::V2),
             Nu6_3 => Some(OrchardProtocolRevision::V3),
@@ -1038,6 +1066,7 @@ pub mod testing {
             BranchId::Blossom,
             BranchId::Heartwood,
             BranchId::Canopy,
+            BranchId::Vault,
             BranchId::Nu5,
             BranchId::Nu6,
             BranchId::Nu6_1,
@@ -1105,6 +1134,7 @@ mod tests {
                 blossom: None,
                 heartwood: None,
                 canopy: None,
+                vault: None,
                 nu5: None,
                 nu6: None,
                 nu6_1: None,
@@ -1132,11 +1162,11 @@ mod tests {
     }
 
     /// Upgrades that exist in every build but that no network of this build
-    /// schedules: in a Zcash build, Ycash's own upgrades.
+    /// schedules: Vault everywhere, and in a Zcash build Ycash too.
     #[cfg(not(feature = "ycash"))]
-    const UNSCHEDULED: &[NetworkUpgrade] = &[NetworkUpgrade::Ycash];
+    const UNSCHEDULED: &[NetworkUpgrade] = &[NetworkUpgrade::Ycash, NetworkUpgrade::Vault];
     #[cfg(feature = "ycash")]
-    const UNSCHEDULED: &[NetworkUpgrade] = &[];
+    const UNSCHEDULED: &[NetworkUpgrade] = &[NetworkUpgrade::Vault];
 
     #[test]
     fn nu_ordering() {
@@ -1483,5 +1513,94 @@ mod tests {
                 assert_eq!(network.activation_height(nu), None);
             }
         }
+    }
+
+    /// Vault: branch ID `0x6d5b7a31` round-trips in every build, the epoch is
+    /// Sapling-era without Orchard, and no public network schedules it.
+    #[test]
+    fn vault_is_sapling_era_without_orchard() {
+        assert_eq!(BranchId::try_from(0x6d5b_7a31), Ok(BranchId::Vault));
+        assert_eq!(u32::from(BranchId::Vault), 0x6d5b_7a31);
+        assert_eq!(NetworkUpgrade::Vault.branch_id(), BranchId::Vault);
+        assert_eq!(
+            BranchId::Vault.network_upgrade(),
+            Some(NetworkUpgrade::Vault)
+        );
+        assert!(BranchId::Vault.has_sprout());
+        assert!(BranchId::Vault.has_sapling());
+        assert!(!BranchId::Vault.has_orchard());
+        assert_eq!(BranchId::Vault.orchard_protocol_revision(), None);
+        assert!(BranchId::Vault.sprout_uses_groth_proofs());
+        for network in [Network::MainNetwork, Network::TestNetwork] {
+            assert_eq!(network.activation_height(NetworkUpgrade::Vault), None);
+            assert_eq!(BranchId::Vault.height_bounds(&network), None);
+        }
+    }
+
+    /// K-1: Vault comes after Canopy and before NU5 in activation order.
+    #[test]
+    fn vault_is_ordered_before_nu5() {
+        let position = |nu| UPGRADES_IN_ORDER.iter().position(|x| *x == nu).unwrap();
+        assert_eq!(
+            position(NetworkUpgrade::Vault),
+            position(NetworkUpgrade::Canopy) + 1
+        );
+        assert_eq!(
+            position(NetworkUpgrade::Nu5),
+            position(NetworkUpgrade::Vault) + 1
+        );
+    }
+
+    /// A local network with Vault on a Canopy-era chain (the Ycash regtest
+    /// shape), and with NU5 scheduled after Vault.
+    #[test]
+    #[cfg(feature = "local-consensus")]
+    fn local_vault_epoch() {
+        use crate::local_consensus::LocalNetwork;
+
+        let mut network = LocalNetwork {
+            overwinter: Some(BlockHeight(1)),
+            sapling: Some(BlockHeight(1)),
+            ycash: Some(BlockHeight(1)),
+            blossom: Some(BlockHeight(1)),
+            heartwood: Some(BlockHeight(1)),
+            canopy: Some(BlockHeight(1)),
+            vault: Some(BlockHeight(10)),
+            nu5: None,
+            nu6: None,
+            nu6_1: None,
+            nu6_2: None,
+            nu6_3: None,
+            nu7: None,
+        };
+        assert_eq!(
+            BranchId::for_height(&network, BlockHeight(9)),
+            BranchId::Canopy
+        );
+        assert_eq!(
+            BranchId::for_height(&network, BlockHeight(10)),
+            BranchId::Vault
+        );
+        assert_eq!(
+            BranchId::Canopy.height_bounds(&network),
+            Some((BlockHeight(1), Some(BlockHeight(10))))
+        );
+        assert_eq!(
+            BranchId::Vault.height_bounds(&network),
+            Some((BlockHeight(10), None))
+        );
+        network.nu5 = Some(BlockHeight(20));
+        assert_eq!(
+            BranchId::for_height(&network, BlockHeight(19)),
+            BranchId::Vault
+        );
+        assert_eq!(
+            BranchId::for_height(&network, BlockHeight(20)),
+            BranchId::Nu5
+        );
+        assert_eq!(
+            BranchId::Vault.height_bounds(&network),
+            Some((BlockHeight(10), Some(BlockHeight(20))))
+        );
     }
 }
