@@ -43,7 +43,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 # The crates kogany patches from this fork: the whole published closure of
-# the 5.0.0-rc.2 release (udon and bento stay on crates.io, see kogany's
+# the 5.0.0-rc.4 release (udon and bento stay on crates.io, see kogany's
 # root Cargo.toml).
 DEFAULT_CRATES = [
     "zakura-address",
