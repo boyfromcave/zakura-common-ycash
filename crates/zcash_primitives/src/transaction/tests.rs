@@ -1172,3 +1172,17 @@ fn ycash_transactions_are_v4() {
         assert!(!version.valid_in_branch(BranchId::Ycash), "{version:?}");
     }
 }
+
+/// The vault epoch is v4-only (`ycashd` rejects a v5 transaction under Vault);
+/// NU5's answers are unchanged.
+#[test]
+fn vault_transactions_stay_v4() {
+    assert_eq!(
+        TxVersion::suggested_for_branch(BranchId::Vault),
+        TxVersion::V4
+    );
+    assert!(TxVersion::V4.valid_in_branch(BranchId::Vault));
+    assert!(!TxVersion::V5.valid_in_branch(BranchId::Vault));
+    assert!(!TxVersion::V6.valid_in_branch(BranchId::Vault));
+    assert!(TxVersion::V5.valid_in_branch(BranchId::Nu5));
+}
