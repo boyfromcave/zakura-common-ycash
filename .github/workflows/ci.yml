@@ -492,7 +492,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macOS-latest]
+        # zakura-common-ycash (2026-11-03): the fork does not change this crate; its macOS smoke is
+        # upstream's and runs on pushes only, not on pull requests (a stalled macOS runner blocked PRs).
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["windows-latest"]') || fromJSON('["windows-latest", "macOS-latest"]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -882,7 +884,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macOS-latest]
+        # zakura-common-ycash (2026-11-03): the fork does not change this crate; its macOS smoke is
+        # upstream's and runs on pushes only, not on pull requests (a stalled macOS runner blocked PRs).
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["windows-latest"]') || fromJSON('["windows-latest", "macOS-latest"]') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
