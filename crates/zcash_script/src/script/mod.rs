@@ -385,6 +385,12 @@ impl Code {
         iter::sig_op_count(self.parse(), accurate)
     }
 
+    /// Ycash: the policy sigops of `OP_CHECKPQSIG` in this script, 20 per 0xc2 opcode
+    /// ([`crate::vault::pq_sig_op_count`]). Not part of [`Code::sig_op_count`], as in ycash6.
+    pub fn pq_sig_op_count(&self) -> u32 {
+        crate::vault::pq_sig_op_count(self)
+    }
+
     /// Returns whether the script is guaranteed to fail at execution,
     /// regardless of the initial stack.
     ///

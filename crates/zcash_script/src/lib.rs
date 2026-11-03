@@ -24,6 +24,7 @@ pub mod pv;
 pub mod script;
 pub mod signature;
 pub mod solver;
+pub mod vault;
 
 #[cfg(feature = "descriptor")]
 pub mod descriptor;

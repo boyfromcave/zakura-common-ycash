@@ -1,0 +1,106 @@
+{
+  "_comment": "Semgrep scan policy for zakura-common-ycash, the Ycash developers' fork of zakura-core/common (contrib/semgrep/README.md). The same keys as ycash-dd, ycash6, librustzcash6 and kogany; rule paths, exclude_rules and the path lists are this repository's own.",
+  "semgrep_version": "1.179.0",
+  "rule_sources": [
+    {
+      "name": "semgrep-rules",
+      "repo": "https://github.com/semgrep/semgrep-rules",
+      "commit": "16b9e6d45f10649f6a531ec4838ed9924372c3bc",
+      "license": "Semgrep Rules License v1.0: free, for our own use; fetched at scan time, never copied in, never quoted in PRs",
+      "id_prefix": "",
+      "paths": [
+        "rust",
+        "python/lang/security",
+        "bash",
+        "dockerfile",
+        "generic/secrets",
+        "yaml/github-actions"
+      ]
+    },
+    {
+      "name": "trailofbits",
+      "repo": "https://github.com/trailofbits/semgrep-rules",
+      "commit": "31390b3a99c04c81522d1b37c8d1900aa2dd4094",
+      "license": "AGPL-3.0",
+      "id_prefix": "trailofbits.",
+      "paths": [
+        "rs",
+        "yaml/github-actions",
+        "generic",
+        "python"
+      ]
+    }
+  ],
+  "local_rules": "contrib/semgrep/rules",
+  "categories": [
+    "security"
+  ],
+  "exclude_rules": {},
+  "audit_rules": {},
+  "bucket_overrides": [],
+  "non_production_paths": [
+    "**/tests/**",
+    "*/tests.rs",
+    "**/testing/**",
+    "**/test_vectors/**",
+    "*test_vectors.rs",
+    "**/testdata/**",
+    "**/benches/**",
+    "**/examples/**",
+    "**/proptest-regressions/**",
+    "**/fixtures/**",
+    ".github/scripts/**",
+    "scripts/**",
+    "contrib/**",
+    "docs/**",
+    "*.md"
+  ],
+  "buckets": {
+    "critical": {
+      "sla_days": 7,
+      "color": "b60205",
+      "label": "semgrep:critical"
+    },
+    "high": {
+      "sla_days": 30,
+      "color": "d93f0b",
+      "label": "semgrep:high"
+    },
+    "medium": {
+      "sla_days": 90,
+      "color": "fbca04",
+      "label": "semgrep:medium"
+    },
+    "low": {
+      "sla_days": 180,
+      "color": "0e8a16",
+      "label": "semgrep:low"
+    }
+  },
+  "autofix_rules": [],
+  "autofix_never_paths": [
+    "crates/zcash_protocol/**",
+    "crates/zcash_primitives/**",
+    "crates/zcash_transparent/**",
+    "crates/zcash_script/**",
+    "crates/zcash_address/**",
+    "crates/zcash_proofs/**",
+    "crates/zcash_note_encryption/**",
+    "crates/sapling-crypto/**",
+    "crates/orchard/**",
+    "crates/orchard-legacy/**",
+    "crates/halo2_proofs/**",
+    "crates/halo2_gadgets/**",
+    "crates/equihash/**"
+  ],
+  "fail_on": [
+    "critical"
+  ],
+  "base_branch": "upgrade/vault",
+  "branch_prefix": "semgrep/",
+  "pr_labels": [
+    "security",
+    "semgrep"
+  ],
+  "overdue_label": "sla:overdue"
+}

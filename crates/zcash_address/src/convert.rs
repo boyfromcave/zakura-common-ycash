@@ -67,7 +67,8 @@ impl<E: Error + 'static> Error for ConversionError<E> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "ycash"), doc = "```")]
+#[cfg_attr(feature = "ycash", doc = "```ignore")]
 /// use zcash_address::{ConversionError, TryFromAddress, UnsupportedAddress, ZcashAddress};
 /// use zcash_protocol::consensus::NetworkType;
 ///
@@ -318,7 +319,8 @@ pub trait Converter<T> {
 ///
 /// # Examples
 ///
-/// ```
+#[cfg_attr(not(feature = "ycash"), doc = "```")]
+#[cfg_attr(feature = "ycash", doc = "```ignore")]
 /// use zcash_address::{ToAddress, ZcashAddress};
 /// use zcash_protocol::consensus::NetworkType;
 ///

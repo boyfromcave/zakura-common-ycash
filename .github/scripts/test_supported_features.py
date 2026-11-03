@@ -7,13 +7,14 @@ from supported_features import supported_features
 class SupportedFeaturesTests(unittest.TestCase):
     def setUp(self):
         self.metadata = {
-            "workspace_members": ["a-id", "b-id", "c-id"],
+            "workspace_members": ["a-id", "b-id", "c-id", "y-id"],
             "packages": [
                 {"id": "a-id", "name": "a", "features": {
                     "std": [], "default": [], "backend-halo2": [], "backend-alternate": []}},
                 {"id": "b-id", "name": "b", "features": {
                     "alloc": [], "pallas-pasta": [], "pallas-alternate": []}},
                 {"id": "c-id", "name": "c", "features": {}},
+                {"id": "y-id", "name": "y", "features": {"std": [], "ycash": []}},
                 {"id": "external", "name": "external", "features": {"unrelated": []}},
             ],
         }
@@ -24,7 +25,8 @@ class SupportedFeaturesTests(unittest.TestCase):
 
     def test_workspace_excludes_alternate_selectors_and_external_packages(self):
         self.assertEqual(supported_features(self.metadata, {"--workspace"}),
-                         ["a/backend-halo2", "a/default", "a/std", "b/alloc", "b/pallas-pasta"])
+                         ["a/backend-halo2", "a/default", "a/std", "b/alloc", "b/pallas-pasta",
+                          "y/std"])
 
     def test_unknown_package_does_not_enable_workspace_features(self):
         with self.assertRaises(ValueError):
@@ -32,6 +34,12 @@ class SupportedFeaturesTests(unittest.TestCase):
 
     def test_featureless_package_needs_no_feature_arguments(self):
         self.assertEqual(supported_features(self.metadata, {"c"}), [])
+
+    # zakura-common-ycash (2026-11-01): `ycash` only on request.
+    def test_ycash_feature_is_opt_in(self):
+        self.assertEqual(supported_features(self.metadata, {"y"}), ["y/std"])
+        self.assertEqual(supported_features(self.metadata, {"y"}, ycash=True),
+                         ["y/std", "y/ycash"])
 
 
 if __name__ == "__main__":

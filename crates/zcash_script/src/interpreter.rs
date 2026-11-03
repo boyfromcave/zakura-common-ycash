@@ -78,6 +78,27 @@ pub enum Error {
     #[error("discouraged upgradable NOP encountered")]
     DiscourageUpgradableNOPs,
 
+    // Ycash vault primitive (`OP_CHECKSETSIG` / `OP_CHECKSETDORMANT`); ycash6
+    // `SCRIPT_ERR_SETSIG` and `SCRIPT_ERR_SETSIG_COUNT`.
+    #[error("OP_CHECKSETSIG or OP_CHECKSETDORMANT failed")]
+    SetSig,
+
+    #[error("more than one OP_CHECKSETSIG in a script evaluation")]
+    SetSigCount,
+
+    // Ycash post-quantum signatures (`OP_CHECKPQSIG`); ycash6 `SCRIPT_ERR_PQ_*`.
+    #[error("OP_CHECKPQSIG scheme unknown or not active")]
+    PqScheme,
+
+    #[error("OP_CHECKPQSIG key or signature chunking not canonical")]
+    PqChunk,
+
+    #[error("OP_CHECKPQSIG key, key hash or signature of the wrong size")]
+    PqSize,
+
+    #[error("more than one OP_CHECKPQSIG in a script evaluation")]
+    PqCount,
+
     // extensions (these don’t exist in C++, and thus map to `UnknownError`)
     /// Corresponds to the `scriptnum_error` exception in C++.
     #[error("script number error: {0}")]
@@ -178,6 +199,25 @@ bitflags::bitflags! {
         ///
         /// See [BIP65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki) for details.
         const CHECKLOCKTIMEVERIFY = 1 << 9;
+
+        /// Verify CHECKSEQUENCEVERIFY (`OP_NOP3`, 0xb2), height-based relative locks only.
+        ///
+        /// See [BIP112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki) for
+        /// details. Ycash sets it from the vault network upgrade (ycash6
+        /// `SCRIPT_VERIFY_CHECKSEQUENCEVERIFY`); an operand with the type flag (bit 22, time-based)
+        /// fails. Without it, 0xb2 is `OP_NOP3` exactly as upstream.
+        const CHECKSEQUENCEVERIFY = 1 << 10;
+
+        /// Evaluate `OP_CHECKSETSIG` (0xc0), `OP_CHECKSETDORMANT` (0xc1) and `OP_CHECKPQSIG` (0xc2),
+        /// the Ycash vault primitive's opcodes (ycash6 `SCRIPT_VERIFY_VAULT`). Without it all three
+        /// are bad opcodes exactly as upstream. 0xbb–0xbf are never assigned.
+        const Vault = 1 << 11;
+
+        /// Admit `OP_CHECKPQSIG` scheme 0x02 (FN-DSA-512, Falcon). Only meaningful beside
+        /// [`Flags::Vault`], and set from the network's Falcon height (ycash6
+        /// `SCRIPT_VERIFY_PQ_FALCON`). Without it scheme 0x02 fails with [`Error::PqScheme`];
+        /// scheme 0x01 (SLH-DSA) needs no flag of its own.
+        const PqFalcon = 1 << 12;
     }
 }
 
@@ -193,6 +233,107 @@ pub trait SignatureChecker {
 
     /// Return true if the lock time argument is more recent than the time the script was evaluated.
     fn check_lock_time(&self, lock_time: i64) -> bool;
+
+    // The Ycash extensions below (ycash6 `BaseSignatureChecker`) all have defaults that fail
+    // closed, so every existing checker keeps compiling and can satisfy none of them.
+
+    /// BIP112: true iff the relative lock `sequence` (already checked by the interpreter to be
+    /// non-negative, without the disable flag and without the type flag) is satisfied by this
+    /// input's `nSequence` and the transaction's version. See [`check_sequence`] for the
+    /// comparison a transaction checker performs.
+    fn check_sequence(&self, _sequence: i64) -> bool {
+        false
+    }
+
+    /// The number of signatures `role` ([`SET_ROLE_UNLOCK`] or [`SET_ROLE_CANCEL`]) of the set
+    /// `set_id` requires, or `None` if the set is unknown. `set_id` is the 32 bytes as pushed
+    /// (ycash6 `uint256` internal byte order).
+    fn set_threshold(&self, _set_id: &[u8; 32], _role: u8) -> Option<u32> {
+        None
+    }
+
+    /// True iff `sigs` (65-byte compact recoverable signatures, in push order, `sig_1` first;
+    /// their shape is already checked) are by distinct current members of `set_id` over the
+    /// set-signature message for `role` and this input. `script_code` is the script being
+    /// evaluated, as for [`SignatureChecker::check_sig`]. Set membership changes with the chain,
+    /// so an implementation must not cache this verdict.
+    fn check_set_sigs(
+        &self,
+        _set_id: &[u8; 32],
+        _role: u8,
+        _sigs: &[[u8; SET_SIG_SIZE]],
+        _script_code: &script::Code,
+    ) -> bool {
+        false
+    }
+
+    /// True iff the set `set_id` is released (dormant, wound down, or unknown) at the spending
+    /// height.
+    fn is_set_released(&self, _set_id: &[u8; 32]) -> bool {
+        false
+    }
+
+    /// `OP_CHECKPQSIG`: true iff `sig` (the scheme's signature, without the trailing hash-type
+    /// byte) verifies under `scheme` and `pub_key` over the signature hash of `script_code` and
+    /// `hash_type` (the signature's last byte, decoded without strictness). The interpreter has
+    /// already checked the scheme, the sizes and that `pub_key` hashes to the script's key hash.
+    fn check_pq_sig(
+        &self,
+        _scheme: u8,
+        _sig: &[u8],
+        _hash_type: &signature::HashType,
+        _pub_key: &[u8],
+        _script_code: &script::Code,
+    ) -> bool {
+        false
+    }
+}
+
+/// `OP_CHECKSETSIG` role 1: the set's unlock threshold.
+pub const SET_ROLE_UNLOCK: u8 = 1;
+
+/// `OP_CHECKSETSIG` role 2: the set's cancel threshold.
+pub const SET_ROLE_CANCEL: u8 = 2;
+
+/// The size of one `OP_CHECKSETSIG` signature: header (31..=34) || r || s, low S.
+pub const SET_SIG_SIZE: usize = 65;
+
+/// BIP68/BIP112: the input's relative lock is disabled.
+pub const SEQUENCE_LOCKTIME_DISABLE_FLAG: u32 = 1 << 31;
+
+/// BIP68/BIP112: the relative lock is time-based (Ycash refuses it under
+/// [`Flags::CHECKSEQUENCEVERIFY`]).
+pub const SEQUENCE_LOCKTIME_TYPE_FLAG: u32 = 1 << 22;
+
+/// BIP68/BIP112: the bits of the relative lock value.
+pub const SEQUENCE_LOCKTIME_MASK: u32 = 0x0000_ffff;
+
+/// The comparison of ycash6 `TransactionSignatureChecker::CheckSequence` (BIP112): true iff
+/// the operand `sequence` is satisfied by an input whose `nSequence` is `tx_sequence`, in a
+/// transaction of version `tx_version`. A transaction checker implements
+/// [`SignatureChecker::check_sequence`] with it.
+pub fn check_sequence(tx_version: u32, tx_sequence: u32, sequence: i64) -> bool {
+    let tx_sequence = i64::from(tx_sequence);
+    // Fail if the transaction's version number is not set high enough to trigger BIP 68 rules.
+    if tx_version < 2 {
+        return false;
+    }
+    // Sequence numbers with their most significant bit set are not consensus constrained.
+    if tx_sequence & i64::from(SEQUENCE_LOCKTIME_DISABLE_FLAG) != 0 {
+        return false;
+    }
+    // Mask off any bits that do not have consensus-enforced meaning before the comparisons.
+    let mask = i64::from(SEQUENCE_LOCKTIME_TYPE_FLAG | SEQUENCE_LOCKTIME_MASK);
+    let tx_masked = tx_sequence & mask;
+    let masked = sequence & mask;
+    let type_flag = i64::from(SEQUENCE_LOCKTIME_TYPE_FLAG);
+    // Compare apples to apples: both height-based or both time-based.
+    if !((tx_masked < type_flag && masked < type_flag)
+        || (tx_masked >= type_flag && masked >= type_flag))
+    {
+        return false;
+    }
+    masked <= tx_masked
 }
 
 /// A signature checker that always fails. This is helpful in testing cases that don’t involve
@@ -395,6 +536,10 @@ pub struct State {
     /// in a branch of execution where *any* of these conditionals are false, we ignore opcodes
     /// unless those opcodes direct control flow (OP_IF, OP_ELSE, etc.).
     pub(crate) vexec: Stack<bool>,
+    /// Executed `OP_CHECKSETSIG`s in this evaluation (Ycash: at most one).
+    pub(crate) set_sig_count: u8,
+    /// Executed `OP_CHECKPQSIG`s in this evaluation (Ycash: at most one).
+    pub(crate) pq_sig_count: u8,
 }
 
 impl State {
@@ -425,6 +570,8 @@ impl State {
             altstack,
             op_count,
             vexec,
+            set_sig_count: 0,
+            pq_sig_count: 0,
         }
     }
 

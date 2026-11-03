@@ -93,6 +93,8 @@ pub const CHECKMULTISIG: Opcode = Operation(OP_CHECKMULTISIG);
 pub const CHECKMULTISIGVERIFY: Opcode = Operation(OP_CHECKMULTISIGVERIFY);
 pub const NOP1: Opcode = Operation(OP_NOP1);
 pub const CHECKLOCKTIMEVERIFY: Opcode = Operation(OP_CHECKLOCKTIMEVERIFY);
+/// Ycash: `OP_NOP3` is `OP_CHECKSEQUENCEVERIFY` under `Flags::CHECKSEQUENCEVERIFY`.
+pub const CHECKSEQUENCEVERIFY: Opcode = Operation(OP_NOP3);
 pub const NOP3: Opcode = Operation(OP_NOP3);
 pub const NOP4: Opcode = Operation(OP_NOP4);
 pub const NOP5: Opcode = Operation(OP_NOP5);

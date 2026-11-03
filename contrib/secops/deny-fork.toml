@@ -1,0 +1,34 @@
+# Copyright (c) 2026 The Ycash developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or https://www.opensource.org/licenses/mit-license.php .
+#
+# cargo-deny policy for the fork's Rust graph (the root Cargo.toml / Cargo.lock), the secops.yml
+# `cargo-deny` job (.github/README-ycash.md "Security CI"):
+#   cargo deny --locked --manifest-path Cargo.toml --config contrib/secops/deny-fork.toml check advisories bans sources
+# Beside, not instead of, upstream's own policy: the root deny.toml (licences, bans, sources) that
+# supply-chain.yml runs, kept as upstream wrote it so an upstream sync never conflicts here. Here
+# advisories block; there they are report-only. Every ignore carries its reason; the same list,
+# with an expiry and the reasons in full, is in osv-scanner.toml (the fork's lock is upstream's and
+# serves only the fork's CI; kogany's own lock is what ships).
+
+[graph]
+targets = ["x86_64-unknown-linux-gnu", "aarch64-unknown-linux-gnu", "x86_64-apple-darwin", "aarch64-apple-darwin", "x86_64-pc-windows-msvc"]
+
+[advisories]
+version = 2
+yanked = "warn"
+ignore = [
+    { id = "RUSTSEC-2025-0141", reason = "bincode unmaintained: dev-dependency of the pasta/reddsa/redjubjub tests only" },
+    { id = "RUSTSEC-2026-0385", reason = "ctutils 0.4.3 in upstream's lock; kogany's own lock has 0.4.6, past the fix (osv-scanner.toml)" },
+    { id = "RUSTSEC-2024-0436", reason = "paste unmaintained: via image/exr, a dev-dependency of zakura-halo2-proofs" },
+    { id = "RUSTSEC-2026-0194", reason = "quick-xml 0.26: via pprof/inferno, a benchmark-profiling dev-dependency" },
+    { id = "RUSTSEC-2026-0195", reason = "quick-xml 0.26: via pprof/inferno, a benchmark-profiling dev-dependency" },
+]
+
+[bans]
+# Duplicate versions are the upstream graph as upstream left it; upstream's deny.toml judges them.
+multiple-versions = "allow"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

@@ -23,9 +23,11 @@ use crate::consensus::{BlockHeight, NetworkType, NetworkUpgrade, Parameters};
 ///     let regtest = LocalNetwork {
 ///         overwinter: Some(BlockHeight::from_u32(1)),
 ///         sapling: Some(BlockHeight::from_u32(1)),
+///         ycash: None,
 ///         blossom: Some(BlockHeight::from_u32(1)),
 ///         heartwood: Some(BlockHeight::from_u32(1)),
 ///         canopy: Some(BlockHeight::from_u32(1)),
+///         vault: None,
 ///         nu5: Some(BlockHeight::from_u32(1)),
 ///         nu6: Some(BlockHeight::from_u32(1)),
 ///         nu6_1: Some(BlockHeight::from_u32(1)),
@@ -39,9 +41,13 @@ use crate::consensus::{BlockHeight, NetworkType, NetworkUpgrade, Parameters};
 pub struct LocalNetwork {
     pub overwinter: Option<BlockHeight>,
     pub sapling: Option<BlockHeight>,
+    /// Ycash's fork upgrade; `None` on a Zcash regtest.
+    pub ycash: Option<BlockHeight>,
     pub blossom: Option<BlockHeight>,
     pub heartwood: Option<BlockHeight>,
     pub canopy: Option<BlockHeight>,
+    /// Ycash's vault upgrade (ordered before NU5); `None` on a Zcash regtest.
+    pub vault: Option<BlockHeight>,
     pub nu5: Option<BlockHeight>,
     pub nu6: Option<BlockHeight>,
     pub nu6_1: Option<BlockHeight>,
@@ -60,9 +66,11 @@ impl Parameters for LocalNetwork {
         match nu {
             NetworkUpgrade::Overwinter => self.overwinter,
             NetworkUpgrade::Sapling => self.sapling,
+            NetworkUpgrade::Ycash => self.ycash,
             NetworkUpgrade::Blossom => self.blossom,
             NetworkUpgrade::Heartwood => self.heartwood,
             NetworkUpgrade::Canopy => self.canopy,
+            NetworkUpgrade::Vault => self.vault,
             NetworkUpgrade::Nu5 => self.nu5,
             NetworkUpgrade::Nu6 => self.nu6,
             NetworkUpgrade::Nu6_1 => self.nu6_1,
@@ -98,9 +106,11 @@ mod tests {
         let regtest = LocalNetwork {
             overwinter: Some(expected_overwinter),
             sapling: Some(expected_sapling),
+            ycash: None,
             blossom: Some(expected_blossom),
             heartwood: Some(expected_heartwood),
             canopy: Some(expected_canopy),
+            vault: None,
             nu5: Some(expected_nu5),
             nu6: Some(expected_nu6),
             nu6_1: Some(expected_nu6_1),
@@ -140,9 +150,11 @@ mod tests {
         let regtest = LocalNetwork {
             overwinter: Some(expected_overwinter),
             sapling: Some(expected_sapling),
+            ycash: None,
             blossom: Some(expected_blossom),
             heartwood: Some(expected_heartwood),
             canopy: Some(expected_canopy),
+            vault: None,
             nu5: Some(expected_nu5),
             nu6: Some(expected_nu6),
             nu6_1: Some(expected_nu6_1),
@@ -214,9 +226,11 @@ mod tests {
         let regtest = LocalNetwork {
             overwinter: Some(expected_overwinter),
             sapling: Some(expected_sapling),
+            ycash: None,
             blossom: Some(expected_blossom),
             heartwood: Some(expected_heartwood),
             canopy: Some(expected_canopy),
+            vault: None,
             nu5: Some(expected_nu5),
             nu6: Some(expected_nu6),
             nu6_1: Some(expected_nu6_1),

@@ -27,14 +27,22 @@ pub const HRP_SAPLING_EXTENDED_FULL_VIEWING_KEY: &str = "zxviewtestsapling";
 ///
 /// [`PaymentAddress`]: https://docs.rs/sapling-crypto/latest/sapling_crypto/struct.PaymentAddress.html
 /// [Zcash Protocol Specification]: https://github.com/zcash/zips/blob/main/rendered/protocol/protocol.pdf
+#[cfg(not(feature = "ycash"))]
 pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "ztestsapling";
+/// Ycash: `ycashd` `src/chainparams.cpp`, `SAPLING_PAYMENT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const HRP_SAPLING_PAYMENT_ADDRESS: &str = "ytestsapling";
 
 /// The prefix for a Base58Check-encoded testnet Sprout address.
 ///
 /// Defined in the [Zcash Protocol Specification section 5.6.3][sproutpaymentaddrencoding].
 ///
 /// [sproutpaymentaddrencoding]: https://zips.z.cash/protocol/protocol.pdf#sproutpaymentaddrencoding
+#[cfg(not(feature = "ycash"))]
 pub const B58_SPROUT_ADDRESS_PREFIX: [u8; 2] = [0x16, 0xb6];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `ZCPAYMENT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_SPROUT_ADDRESS_PREFIX: [u8; 2] = [0x16, 0x52];
 
 /// The prefix for a Base58Check-encoded DER-encoded testnet [`SecretKey`], as specified via the
 /// bitcoin-derived [`EncodeSecret`] format function.
@@ -46,12 +54,20 @@ pub const B58_SECRET_KEY_PREFIX: [u8; 1] = [0xef];
 /// The prefix for a Base58Check-encoded testnet transparent [`PublicKeyHash`].
 ///
 /// [`PublicKeyHash`]: https://docs.rs/zcash_primitives/latest/zcash_primitives/legacy/enum.TransparentAddress.html
+#[cfg(not(feature = "ycash"))]
 pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x1d, 0x25];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `PUBKEY_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_PUBKEY_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0x95];
 
 /// The prefix for a Base58Check-encoded testnet transparent [`ScriptHash`].
 ///
 /// [`ScriptHash`]: https://docs.rs/zcash_primitives/latest/zcash_primitives/legacy/enum.TransparentAddress.html
+#[cfg(not(feature = "ycash"))]
 pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0xba];
+/// Ycash: `ycashd` `src/chainparams.cpp`, `SCRIPT_ADDRESS`.
+#[cfg(feature = "ycash")]
+pub const B58_SCRIPT_ADDRESS_PREFIX: [u8; 2] = [0x1c, 0x2a];
 
 /// The HRP for a Bech32m-encoded testnet [ZIP 320] TEX address.
 ///

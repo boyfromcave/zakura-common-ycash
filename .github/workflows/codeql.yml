@@ -1,0 +1,64 @@
+# Copyright (c) 2026 The Ycash developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or https://www.opensource.org/licenses/mit-license.php .
+#
+name: codeql
+
+# CodeQL code scanning (.github/README-ycash.md "Security CI"; the same design as
+# ycash6/SECURITY-CI.md). The language list is this repository's: the Rust workspace (crates/,
+# Cargo.toml), the Python tooling (contrib/, scripts/, .github/scripts) and the GitHub Actions
+# workflows themselves.
+#
+#   build-mode none for every language: CodeQL extracts the sources without compiling the workspace,
+#   so this runs in minutes; the build-backed coverage is ci.yml (feature off and `ycash`).
+#   Query suite: security-extended.
+#
+#   every pull_request, push to upgrade/vault and vaults/kogany-compat, weekly Monday 04:41 UTC on
+#   the default branch. Results go to GitHub code scanning (category codeql/<language>) only: no PR,
+#   no issue. This job never fails on an alert; code scanning's own PR check shows alerts a PR
+#   introduces.
+on:
+  push:
+    branches: ['upgrade/vault', 'vaults/**']
+  pull_request:
+    branches: ['upgrade/vault', 'vaults/**', 'kc/**']
+  schedule:
+    - cron: '41 4 * * 1'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: codeql-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  analyze:
+    name: analyze (${{ matrix.language }})
+    # A fork's PR token cannot upload to code scanning; the push / schedule runs cover forks' code once merged.
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      actions: read          # the actions extractor reads workflow metadata
+      security-events: write # upload the SARIF to code scanning
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [rust, python, actions]
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          queries: security-extended
+          config: |
+            paths-ignore:
+              - target
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          category: codeql/${{ matrix.language }}

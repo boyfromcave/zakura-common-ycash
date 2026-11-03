@@ -2,15 +2,20 @@ name: Workflow security
 
 on:
   pull_request:
-    branches: [main, "feat/**", "release/**", "agent/**"]
+    # zakura-common-ycash (2026-11-01): only PRs into the fork's branches (.github/README-ycash.md "Triggers").
+    branches: [upgrade/vault, "vaults/**", "kc/**"]
     paths:
       - .github/**
   push:
+    # zakura-common-ycash (2026-11-01): only pushes to the fork's branches; upstream's `main` dropped.
     branches:
-      - main
+      - upgrade/vault
+      - "vaults/**"
     paths:
       - .github/**
-  merge_group:
+  # zakura-common-ycash (2026-11-01): no merge queue on the fork, and nothing runs outside its
+  # branches (.github/README-ycash.md "Triggers").
+  # merge_group:
 
 permissions:
   contents: read

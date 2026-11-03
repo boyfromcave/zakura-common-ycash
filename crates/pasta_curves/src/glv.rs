@@ -1494,16 +1494,12 @@ fn planned_strauss_multiexp<C: GlvParams>(
         if worker_jobs == 1 {
             return Some(strauss_multiexp_leaves::<C>(scalars, bases));
         }
-        return Some(
-            (0..worker_jobs)
-                .into_par_iter()
-                .map(|job| {
-                    let start = scalars.len() * job / worker_jobs;
-                    let end = scalars.len() * (job + 1) / worker_jobs;
-                    strauss_multiexp_leaves::<C>(&scalars[start..end], &bases[start..end])
-                })
-                .reduce(C::identity, |left, right| left + right),
-        );
+        let partial_sums = par_map_indices(worker_jobs, &|job| {
+            let start = scalars.len() * job / worker_jobs;
+            let end = scalars.len() * (job + 1) / worker_jobs;
+            strauss_multiexp_leaves::<C>(&scalars[start..end], &bases[start..end])
+        });
+        return Some(partial_sums.into_iter().sum());
     }
 
     if scalars.len() <= STRAUSS_LEAF_TERMS {
@@ -2049,6 +2045,85 @@ fn multiexp_serial<C: GlvParams>(
     Some(acc)
 }
 
+/// Runs `job(i)` for every `i < jobs` on the Rayon pool.
+///
+/// This is the module's only Rayon index pipeline, so Rayon's join and bridge
+/// machinery is compiled once rather than once per closure and result type;
+/// that per-closure code was most of the `multicore` feature's
+/// code-generation cost. Every parallel stage here is coarse (a whole window,
+/// batch, or twiddle per job), so the indirect call is negligible.
+#[cfg(feature = "multicore")]
+fn par_for_each_index(jobs: usize, job: &(dyn Fn(usize) + Sync)) {
+    (0..jobs).into_par_iter().for_each(job);
+}
+
+/// Evaluates `job(i)` for every `i < jobs` through [`par_for_each_index`] and
+/// returns the results in index order.
+///
+/// Each job writes its result straight into its own slot of the output
+/// buffer. [`par_for_each_index`] is type-erased, so it cannot hand each job
+/// a disjoint `&mut` slot the way `par_iter_mut` would (that would compile
+/// Rayon's pipeline once per `T` again); the disjointness argument lives in
+/// the `SAFETY` comments instead. If a job panics, the panic propagates out
+/// of [`par_for_each_index`] before `set_len`, so results already written are
+/// leaked, never dropped twice or read uninitialized.
+#[cfg(feature = "multicore")]
+#[allow(unsafe_code)]
+fn par_map_indices<T: Send>(jobs: usize, job: &(dyn Fn(usize) -> T + Sync)) -> Vec<T> {
+    /// The output buffer's base pointer, shared by every job.
+    struct Slots<T>(*mut T);
+    // SAFETY: jobs only move `T` values into distinct slots (see the write
+    // below), handing them to the thread that owns the buffer; that is sound
+    // exactly when `T: Send`.
+    unsafe impl<T: Send> Sync for Slots<T> {}
+    impl<T> Slots<T> {
+        /// A method rather than field access, so closures capture the whole
+        /// (`Sync`) `Slots` instead of its raw-pointer field.
+        fn base(&self) -> *mut T {
+            self.0
+        }
+    }
+
+    let mut results: Vec<T> = Vec::with_capacity(jobs);
+    let slots = Slots(results.as_mut_ptr());
+    par_for_each_index(jobs, &|index| {
+        let result = job(index);
+        // SAFETY: `index < jobs <= results.capacity()`, so the slot lies in
+        // the allocation. `par_for_each_index` runs the closure exactly once
+        // per index in `0..jobs`, so no other job writes this slot and nothing
+        // reads it before the loop returns. `write` does not drop the slot's
+        // uninitialized previous contents.
+        unsafe { slots.base().add(index).write(result) };
+    });
+    // SAFETY: `par_for_each_index` returned normally, so every job ran and
+    // initialized its slot, and Rayon's join makes those writes visible here.
+    unsafe { results.set_len(jobs) };
+    results
+}
+
+/// [`Table::mul_decomposed_pairs_affine`] split into one batch per worker,
+/// each batch at least `BATCH_AFFINE_MIN_POINTS` long so it keeps the
+/// batch-affine ladder.
+fn mul_decomposed_pairs_affine_parallel<C: GlvParams>(
+    points: &[C],
+    scalars: &[&Decomposed<C>],
+) -> Vec<C::AffineExt> {
+    #[cfg(feature = "multicore")]
+    {
+        assert_eq!(points.len(), scalars.len());
+        let threads = maybe_rayon::current_num_threads();
+        let batch_len = points.len().div_ceil(threads).max(BATCH_AFFINE_MIN_POINTS);
+        par_map_indices(points.len().div_ceil(batch_len), &|batch| {
+            let start = batch * batch_len;
+            let end = points.len().min(start + batch_len);
+            Table::<C>::mul_decomposed_pairs_affine(&points[start..end], &scalars[start..end])
+        })
+        .concat()
+    }
+    #[cfg(not(feature = "multicore"))]
+    Table::<C>::mul_decomposed_pairs_affine(points, scalars)
+}
+
 /// $\sum_{w < \text{windows}} B^w C_w$ for $C_w$ = `window_sum(w)`, with
 /// adjacent windows paired per rayon task. The pair members are still
 /// computed as independent (joined) subtasks — so wide pools stay as
@@ -2060,11 +2135,15 @@ fn multiexp_serial<C: GlvParams>(
 /// `window_sum` (an arithmetic guard) propagates out. Shared by the
 /// Eisenstein-orbit backend and the prepared zero-check's main-window and
 /// tail drivers.
+///
+/// `window_sum` is a trait object so the Rayon pipeline is compiled once per
+/// curve rather than once per caller; each call reduces a whole window, so
+/// the indirect call is negligible.
 #[cfg(feature = "multicore")]
 fn paired_windows_sum<C: GlvParams>(
     windows: usize,
     window_bits: usize,
-    window_sum: impl Fn(usize) -> Option<C> + Sync,
+    window_sum: &(dyn Fn(usize) -> Option<C> + Sync),
 ) -> Option<C> {
     const WINDOWS_PER_PAIR: usize = 2;
     let pair_count = windows.div_ceil(WINDOWS_PER_PAIR);
@@ -2102,10 +2181,11 @@ fn paired_windows_sum<C: GlvParams>(
 fn parallel_windows_sum<C: GlvParams>(
     windows: usize,
     window_bits: usize,
-    window_sum: impl Fn(usize) -> Option<C> + Sync,
+    window_sum: &(dyn Fn(usize) -> Option<C> + Sync),
 ) -> Option<C> {
-    let window_sums: Option<Vec<C>> = (0..windows).into_par_iter().map(&window_sum).collect();
-    let window_sums = window_sums?;
+    let window_sums = par_map_indices(windows, window_sum)
+        .into_iter()
+        .collect::<Option<Vec<C>>>()?;
     let mut acc = C::identity();
     for (window, sum) in window_sums.into_iter().enumerate().rev() {
         if window + 1 != windows {
@@ -2125,7 +2205,7 @@ fn multiexp_parallel<C: GlvParams>(
     window_bits: usize,
 ) -> Option<C> {
     let window_count = GLV_COMPONENT_BITS / window_bits + 1;
-    parallel_windows_sum::<C>(window_count, window_bits, |window| {
+    parallel_windows_sum::<C>(window_count, window_bits, &|window| {
         let buckets = fill_window::<C>(components, bases, window_bits, window)?;
         Some(sum_buckets::<C>(&buckets))
     })
@@ -3657,19 +3737,7 @@ fn mixed_radix_diagonal_transpose<C: GlvParams>(
         target_slots.extend(destinations);
     }
 
-    #[cfg(feature = "multicore")]
-    let products = {
-        let threads = maybe_rayon::current_num_threads();
-        let batch_len = points.len().div_ceil(threads).max(BATCH_AFFINE_MIN_POINTS);
-        let batches: Vec<Vec<_>> = points
-            .par_chunks(batch_len)
-            .zip(scalar_refs.par_chunks(batch_len))
-            .map(|(points, scalars)| Table::<C>::mul_decomposed_pairs_affine(points, scalars))
-            .collect();
-        batches.into_iter().flatten().collect::<Vec<_>>()
-    };
-    #[cfg(not(feature = "multicore"))]
-    let products = Table::<C>::mul_decomposed_pairs_affine(&points, &scalar_refs);
+    let products = mul_decomposed_pairs_affine_parallel::<C>(&points, &scalar_refs);
     assert_eq!(products.len(), target_slots.len());
     for (product, (target_index, negate)) in products.into_iter().zip(target_slots) {
         target[target_index] = if negate { -product } else { product };
@@ -3862,33 +3930,20 @@ pub(crate) fn fft_vartime<C: GlvParams>(
         // batch as an independent Rayon task. With one worker, the repeated
         // table normalizations cost more than the transpose saves.
         if use_twiddle_major {
+            let twiddle_products = |j: usize| {
+                let points: Vec<_> = output
+                    .chunks(chunk)
+                    .map(|block| C::from(block[half + j]))
+                    .collect();
+                Table::<C>::mul_decomposed_same_scalar_affine(
+                    &points,
+                    &twiddles[j * twiddle_stride],
+                )
+            };
             #[cfg(feature = "multicore")]
-            let products: Vec<Vec<_>> = (1..half)
-                .into_par_iter()
-                .map(|j| {
-                    let points: Vec<_> = output
-                        .chunks(chunk)
-                        .map(|block| C::from(block[half + j]))
-                        .collect();
-                    Table::<C>::mul_decomposed_same_scalar_affine(
-                        &points,
-                        &twiddles[j * twiddle_stride],
-                    )
-                })
-                .collect();
+            let products = par_map_indices(half - 1, &|j| twiddle_products(j + 1));
             #[cfg(not(feature = "multicore"))]
-            let products: Vec<Vec<_>> = (1..half)
-                .map(|j| {
-                    let points: Vec<_> = output
-                        .chunks(chunk)
-                        .map(|block| C::from(block[half + j]))
-                        .collect();
-                    Table::<C>::mul_decomposed_same_scalar_affine(
-                        &points,
-                        &twiddles[j * twiddle_stride],
-                    )
-                })
-                .collect();
+            let products: Vec<Vec<_>> = (1..half).map(twiddle_products).collect();
 
             let blocks = output.len() / chunk;
             let mut right_scaled = Vec::with_capacity(output.len() / 2);
@@ -3919,19 +3974,7 @@ pub(crate) fn fft_vartime<C: GlvParams>(
             }
         }
 
-        #[cfg(feature = "multicore")]
-        let products = {
-            let threads = maybe_rayon::current_num_threads();
-            let batch_len = points.len().div_ceil(threads).max(BATCH_AFFINE_MIN_POINTS);
-            let batches: Vec<Vec<_>> = points
-                .par_chunks(batch_len)
-                .zip(scalars.par_chunks(batch_len))
-                .map(|(points, scalars)| Table::<C>::mul_decomposed_pairs_affine(points, scalars))
-                .collect();
-            batches.into_iter().flatten().collect::<Vec<_>>()
-        };
-        #[cfg(not(feature = "multicore"))]
-        let products = Table::<C>::mul_decomposed_pairs_affine(&points, &scalars);
+        let products = mul_decomposed_pairs_affine_parallel::<C>(&points, &scalars);
         let mut products = products.into_iter();
         let mut right_scaled = Vec::with_capacity(output.len() / 2);
         for block in output.chunks(chunk) {
@@ -4362,19 +4405,17 @@ fn mul_same_scalars_affine<C: GlvParams>(
     record_fft_scalar_multiplications(scalar_inputs.iter().map(Vec::len).sum());
     #[cfg(feature = "multicore")]
     {
-        scalar_inputs
-            .into_par_iter()
-            .zip(scalars.par_iter())
-            .map(|(points, scalar)| {
-                let threads = maybe_rayon::current_num_threads();
-                let batch_len = points.len().div_ceil(threads).max(BATCH_AFFINE_MIN_POINTS);
-                let batches: Vec<Vec<_>> = points
-                    .par_chunks(batch_len)
-                    .map(|points| Table::<C>::mul_decomposed_same_scalar_affine(points, scalar))
-                    .collect();
-                batches.into_iter().flatten().collect()
+        par_map_indices(scalar_inputs.len(), &|group| {
+            let (points, scalar) = (&scalar_inputs[group], &scalars[group]);
+            let threads = maybe_rayon::current_num_threads();
+            let batch_len = points.len().div_ceil(threads).max(BATCH_AFFINE_MIN_POINTS);
+            par_map_indices(points.len().div_ceil(batch_len), &|batch| {
+                let start = batch * batch_len;
+                let end = points.len().min(start + batch_len);
+                Table::<C>::mul_decomposed_same_scalar_affine(&points[start..end], scalar)
             })
-            .collect()
+            .concat()
+        })
     }
     #[cfg(not(feature = "multicore"))]
     {
@@ -4823,6 +4864,61 @@ mod tests {
     #[test]
     fn strauss_multiexp_matches_expected_vesta() {
         strauss_multiexp_matches_expected::<vesta::Point>();
+    }
+
+    #[cfg(feature = "multicore")]
+    fn with_pool(num_threads: usize, f: impl FnOnce() + Send) {
+        maybe_rayon::ThreadPoolBuilder::new()
+            .num_threads(num_threads)
+            .build()
+            .expect("test thread pool must build")
+            .install(f);
+    }
+
+    #[cfg(feature = "multicore")]
+    #[test]
+    fn par_map_indices_returns_results_in_index_order() {
+        for num_threads in [1, 2, 8] {
+            with_pool(num_threads, || {
+                for jobs in [0usize, 1, 2, 7, 64, 1_000] {
+                    // Heap-owning results, so a bad slot write would show up
+                    // as a corrupted or double-freed value.
+                    let results = par_map_indices(jobs, &|index| std::format!("job {index}"));
+                    let expected: Vec<_> =
+                        (0..jobs).map(|index| std::format!("job {index}")).collect();
+                    assert_eq!(results, expected, "{jobs} jobs on {num_threads} threads");
+                }
+                let units = par_map_indices(5, &|_| ());
+                assert_eq!(units.len(), 5);
+            });
+        }
+    }
+
+    #[cfg(feature = "multicore")]
+    #[test]
+    fn par_map_indices_leaks_written_results_when_a_job_panics() {
+        use core::sync::atomic::{AtomicUsize, Ordering};
+
+        static DROPS: AtomicUsize = AtomicUsize::new(0);
+        struct Counted;
+        impl Drop for Counted {
+            fn drop(&mut self) {
+                DROPS.fetch_add(1, Ordering::Relaxed);
+            }
+        }
+
+        with_pool(4, || {
+            let outcome = std::panic::catch_unwind(|| {
+                par_map_indices(64, &|index| {
+                    assert_ne!(index, 37, "injected job panic");
+                    Counted
+                })
+            });
+            assert!(outcome.is_err(), "the job panic must propagate");
+        });
+        // Completed results stay in the abandoned buffer: leaked, not dropped
+        // (and so never dropped twice).
+        assert_eq!(DROPS.load(Ordering::Relaxed), 0);
     }
 
     #[cfg(feature = "multicore")]

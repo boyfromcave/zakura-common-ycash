@@ -1,0 +1,68 @@
+# gitleaks accepted findings (the `gitleaks` job of .github/workflows/secops.yml; .github/README-ycash.md).
+# One fingerprint per line (commit:file:rule:line, as gitleaks prints it), under the reason it is not a
+# secret. Triaged 2026-11-01: every entry is in upstream zakura-core/common history (at or before the
+# fork's base bdbca121628d, or on an upstream branch), found by the full-history scan the nightly run
+# does. A real secret is never accepted.
+
+# Upstream formal-verification evidence (qa/aeneas/evidence/*.json): SHA-256 digests of extracted
+# proof artefacts, matched as generic-api-key; public content hashes, not credentials.
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/fresh.json:generic-api-key:546
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:24930
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27901
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27912
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27918
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27927
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27938
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27946
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27963
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27972
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/full-replay-incomplete.json:generic-api-key:27977
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1418
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1429
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1435
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1444
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1455
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1463
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-aarch64.json:generic-api-key:1480
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:699
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:710
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:716
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:725
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:736
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:744
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:761
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-array-dot.json:generic-api-key:770
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1078
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1089
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1095
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1104
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1115
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1123
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1140
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1149
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-dot-iter.json:generic-api-key:1154
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1152
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1163
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1169
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1178
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1189
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1197
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1214
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-pairs.json:generic-api-key:1223
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-portable.json:generic-api-key:1282
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-portable.json:generic-api-key:1293
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-portable.json:generic-api-key:1299
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-portable.json:generic-api-key:1308
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-portable.json:generic-api-key:1319
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-serial.json:generic-api-key:953
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-serial.json:generic-api-key:964
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-serial.json:generic-api-key:970
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-short.json:generic-api-key:1080
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/product-short.json:generic-api-key:1091
+57d2ad27791fe542c6b465c8e5f8630e45dc951f:qa/aeneas/evidence/public-inversion-complete.json:generic-api-key:887
+
+# Upstream Orchard preparation fixture manifest: SHA-256 digests of the fixture files, matched as generic-api-key.
+4d91ca335fc6a1e31dca95e67519fef6d8f50066:tools/orchard-preparation/fixtures/manifest.json:generic-api-key:5
+
+# Upstream zcash_script descriptor test: a compressed secp256k1 public key literal in a unit test (public by construction).
+239bbfb21749b4db2d149913befe5b91e8d0dbdf:crates/zcash_script/src/descriptor.rs:generic-api-key:288

@@ -1,7 +1,7 @@
 [package]
 name = "zakura-zcash-script"
 description = "Zcash transparent script parsing, building, and interpretation"
-version = "0.0.1"
+version = "0.0.1+ycash.1"
 authors = [
     "Electric Coin Company <info@electriccoin.co>",
     "Greg Pfeil <greg@technomadic.org>",
@@ -40,6 +40,7 @@ thiserror = { version = "2", default-features = false }
 [dev-dependencies]
 hex = { version = "0.4.3", default-features = false, features = ["std"] }
 lazy_static = "1.5"
+serde_json = "1.0"
 
 [features]
 default = ["std", "signature-validation"]

@@ -1,0 +1,41 @@
+# Copyright (c) 2026 The Ycash developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or https://www.opensource.org/licenses/mit-license.php .
+#
+# Ycash-specific Semgrep rules for zakura-common-ycash, scanned beside the pinned semgrep-rules
+# packs (contrib/semgrep/README.md). Each rule has a positive and a negative case in ycash.rs beside
+# this file (`contrib/semgrep/scan.py --test`, the secops.yml `semgrep-rules` job). metadata.bucket
+# pins a rule's bucket; without it the bucket follows severity/impact/confidence.
+rules:
+  - id: ycash.consensus.branch-id-literal-outside-definition
+    languages: [rust]
+    # Ycash's own consensus branch IDs (0x374d694f Ycash, 0x6d5b7a31 Vault) have exactly one
+    # definition in the fork: crates/zcash_protocol/src/consensus.rs (YCASH_BRANCH_ID,
+    # VAULT_BRANCH_ID, behind BranchId::try_from and From<BranchId> for u32). Anywhere else a
+    # literal is a second definition that a later branch-ID change would miss. Tests that pin the
+    # value against the definition are excluded by path and by assertion. (librustzcash6's
+    # ycash.consensus.zcash-only-branch-id is not carried over: with the `ycash` feature off this
+    # fork is upstream's Zcash build, so Zcash's branch IDs are meant to be here.)
+    paths:
+      exclude:
+        - "/crates/zcash_protocol/src/consensus.rs"
+        - "**/tests/**"
+        - "*tests.rs"
+        - "*test_vectors*"
+    patterns:
+      - pattern-regex: (?i)\b0x(6d5b_?7a31|374d_?694f)(_?u32)?\b
+      - pattern-not-regex: (?i)//[^\n]*0x(6d5b_?7a31|374d_?694f)
+      - pattern-not-inside: assert_eq!(...)
+      - pattern-not-inside: assert_ne!(...)
+    message: >-
+      A Ycash consensus branch ID literal outside its one definition in
+      zcash_protocol::consensus. ZIP-143/243 signature hashes commit to the branch ID, so a second
+      copy that drifts from the definition makes this code sign or verify for a different chain.
+      Use BranchId::Ycash / BranchId::Vault (u32::from, BranchId::try_from, BranchId::for_height).
+    severity: WARNING
+    metadata:
+      category: security
+      bucket: high
+      cwe: ["CWE-1109: Use of Same Variable for Multiple Purposes"]
+      references: ["crates/zcash_protocol/src/consensus.rs (BranchId)",
+                   "https://zips.z.cash/zip-0200"]
