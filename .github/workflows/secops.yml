@@ -59,7 +59,7 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0  # the PR's or the push's commit range, or the full history
           persist-credentials: false
@@ -93,7 +93,7 @@ jobs:
           rc=$?
           { echo '### gitleaks'; if [ "$rc" -eq 0 ]; then echo "no leaks (${range:-full history})"; else echo "leaks found (${range:-full history}): see the log and code scanning"; fi; } >> "$GITHUB_STEP_SUMMARY"
           exit "$rc"
-      - uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+      - uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         if: ${{ !cancelled() && env.UPLOAD_SARIF == 'true' && hashFiles('gitleaks.sarif') != '' }}
         with:
           sarif_file: gitleaks.sarif
@@ -106,7 +106,7 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Install OSV-Scanner (sha256-verified)
@@ -135,7 +135,7 @@ jobs:
           { echo '### OSV-Scanner'; cat osv.md; } >> "$GITHUB_STEP_SUMMARY"
           cat osv.md
           exit "$rc"
-      - uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+      - uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         if: ${{ !cancelled() && env.UPLOAD_SARIF == 'true' && hashFiles('osv.sarif') != '' }}
         with:
           sarif_file: osv.sarif
@@ -147,7 +147,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Install cargo-deny (sha256-verified)
@@ -170,7 +170,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Local Semgrep rule tests
