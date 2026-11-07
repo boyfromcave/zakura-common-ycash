@@ -805,6 +805,19 @@ pub enum BranchId {
     Canopy,
     /// The consensus rules deployed by [`NetworkUpgrade::Vault`].
     Vault,
+    /// testnet-yb-slow after the shadow split: Canopy's rules under `0x57a24d5d`.
+    ///
+    /// Signatures commit to this id. [`BranchId::rules`] is [`BranchId::Canopy`].
+    SlowShadow,
+    /// testnet-legacy after the shadow split: Canopy's rules under `0x35706728`.
+    ///
+    /// Signatures commit to this id. [`BranchId::rules`] is [`BranchId::Canopy`].
+    LegacyShadow,
+    /// testnet-yb-slow's Vault epoch: Vault's rules under `0xe1f1cc08`, never mainnet's
+    /// `0x6d5b7a31`.
+    ///
+    /// [`BranchId::rules`] is [`BranchId::Vault`].
+    SlowVault,
     /// The consensus rules deployed by [`NetworkUpgrade::Nu5`].
     Nu5,
     /// The consensus rules deployed by [`NetworkUpgrade::Nu6`].
@@ -828,6 +841,13 @@ const YCASH_BRANCH_ID: u32 = 0x374d_694f;
 /// Ycash's vault upgrade (`ycashd` `UPGRADE_VAULT`, Yellowback upgrade plan).
 /// Recognised in every build; no public network schedules it.
 const VAULT_BRANCH_ID: u32 = 0x6d5b_7a31;
+
+/// testnet-yb-slow `UPGRADE_SHADOW` (`ycashd` `SLOW_SHADOW_BRANCH_ID`).
+const SLOW_SHADOW_BRANCH_ID: u32 = 0x57a2_4d5d;
+/// testnet-legacy `UPGRADE_SHADOW` (`ycashd` `LEGACY_SHADOW_BRANCH_ID`).
+const LEGACY_SHADOW_BRANCH_ID: u32 = 0x3570_6728;
+/// testnet-yb-slow `UPGRADE_VAULT` (`ycashd` `SLOW_VAULT_BRANCH_ID`).
+const SLOW_VAULT_BRANCH_ID: u32 = 0xe1f1_cc08;
 
 // Ycash gave the upgrades after its fork their own branch IDs
 // (`ycashd` `src/consensus/upgrades.cpp`); Overwinter, Sapling and NU6 onward
@@ -862,6 +882,9 @@ impl TryFrom<u32> for BranchId {
             HEARTWOOD_BRANCH_ID => Ok(BranchId::Heartwood),
             CANOPY_BRANCH_ID => Ok(BranchId::Canopy),
             VAULT_BRANCH_ID => Ok(BranchId::Vault),
+            SLOW_SHADOW_BRANCH_ID => Ok(BranchId::SlowShadow),
+            LEGACY_SHADOW_BRANCH_ID => Ok(BranchId::LegacyShadow),
+            SLOW_VAULT_BRANCH_ID => Ok(BranchId::SlowVault),
             NU5_BRANCH_ID => Ok(BranchId::Nu5),
             0xc8e7_1055 => Ok(BranchId::Nu6),
             0x4dec_4df0 => Ok(BranchId::Nu6_1),
@@ -884,6 +907,9 @@ impl From<BranchId> for u32 {
             BranchId::Heartwood => HEARTWOOD_BRANCH_ID,
             BranchId::Canopy => CANOPY_BRANCH_ID,
             BranchId::Vault => VAULT_BRANCH_ID,
+            BranchId::SlowShadow => SLOW_SHADOW_BRANCH_ID,
+            BranchId::LegacyShadow => LEGACY_SHADOW_BRANCH_ID,
+            BranchId::SlowVault => SLOW_VAULT_BRANCH_ID,
             BranchId::Nu5 => NU5_BRANCH_ID,
             BranchId::Nu6 => 0xc8e7_1055,
             BranchId::Nu6_1 => 0x4dec_4df0,
@@ -910,6 +936,17 @@ impl BranchId {
         BranchId::Sprout
     }
 
+    /// The consensus rules this id stands for.
+    ///
+    /// The shadow-fork ids commit to themselves in signatures and stand for Canopy or Vault.
+    pub fn rules(self) -> Self {
+        match self {
+            BranchId::SlowShadow | BranchId::LegacyShadow => BranchId::Canopy,
+            BranchId::SlowVault => BranchId::Vault,
+            other => other,
+        }
+    }
+
     /// Returns the network upgrade that activates this set of consensus rules, or
     /// `None` for the pre-Overwinter Sprout rules, which have no activation height.
     ///
@@ -924,6 +961,9 @@ impl BranchId {
             BranchId::Heartwood => NetworkUpgrade::Heartwood,
             BranchId::Canopy => NetworkUpgrade::Canopy,
             BranchId::Vault => NetworkUpgrade::Vault,
+            // The rules epoch. There is no separate network-upgrade variant for these ids.
+            BranchId::SlowShadow | BranchId::LegacyShadow => NetworkUpgrade::Canopy,
+            BranchId::SlowVault => NetworkUpgrade::Vault,
             BranchId::Nu5 => NetworkUpgrade::Nu5,
             BranchId::Nu6 => NetworkUpgrade::Nu6,
             BranchId::Nu6_1 => NetworkUpgrade::Nu6_1,
@@ -982,8 +1022,8 @@ impl BranchId {
     pub fn has_sprout(&self) -> bool {
         use BranchId::*;
         match self {
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | Nu5
-            | Nu6 | Nu6_1 | Nu6_2 => true,
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
+            | SlowShadow | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => false,
         }
@@ -994,9 +1034,8 @@ impl BranchId {
         use BranchId::*;
         match self {
             Sprout | Overwinter => false,
-            Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => {
-                true
-            }
+            Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | SlowShadow | LegacyShadow
+            | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => true,
         }
@@ -1007,7 +1046,8 @@ impl BranchId {
         use BranchId::*;
         match self {
             // Vault: a Sapling-era (v4) epoch on Ycash, without Orchard.
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault => false,
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
+            | SlowShadow | LegacyShadow | SlowVault => false,
             Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
             BranchId::Nu6_3 => true,
             BranchId::Nu7 => true,
@@ -1020,7 +1060,8 @@ impl BranchId {
     pub fn orchard_protocol_revision(&self) -> Option<OrchardProtocolRevision> {
         use BranchId::*;
         match self {
-            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault => None,
+            Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
+            | SlowShadow | LegacyShadow | SlowVault => None,
             Nu5 | Nu6 | Nu6_1 => Some(OrchardProtocolRevision::InsecureV1),
             Nu6_2 => Some(OrchardProtocolRevision::V2),
             Nu6_3 => Some(OrchardProtocolRevision::V3),
@@ -1069,6 +1110,9 @@ pub mod testing {
             BranchId::Heartwood,
             BranchId::Canopy,
             BranchId::Vault,
+            BranchId::SlowShadow,
+            BranchId::LegacyShadow,
+            BranchId::SlowVault,
             BranchId::Nu5,
             BranchId::Nu6,
             BranchId::Nu6_1,
@@ -1119,7 +1163,7 @@ pub mod testing {
 #[cfg(test)]
 mod tests {
     use super::{
-        BlockHeight, BranchId, MAIN_NETWORK, Network, NetworkUpgrade, Parameters, TEST_NETWORK,
+        BlockHeight, BranchId, Network, NetworkUpgrade, Parameters, MAIN_NETWORK, TEST_NETWORK,
         UPGRADES_IN_ORDER,
     };
 
