@@ -1163,7 +1163,7 @@ pub mod testing {
 #[cfg(test)]
 mod tests {
     use super::{
-        BlockHeight, BranchId, Network, NetworkUpgrade, Parameters, MAIN_NETWORK, TEST_NETWORK,
+        BlockHeight, BranchId, MAIN_NETWORK, Network, NetworkUpgrade, Parameters, TEST_NETWORK,
         UPGRADES_IN_ORDER,
     };
 

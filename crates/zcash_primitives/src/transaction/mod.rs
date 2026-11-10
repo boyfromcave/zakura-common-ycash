@@ -214,25 +214,21 @@ impl TxVersion {
             TxVersion::V4 => match consensus_branch_id {
                 Sprout | Overwinter => false,
                 Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | SlowShadow
-                | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1
-                | Nu6_2 => true,
+                | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
                 Nu6_3 => true,
                 Nu7 => false, // ZIP 2003
             },
             TxVersion::V5 => match consensus_branch_id {
                 // Vault: v4 only (ycashd rejects v5 under Vault).
                 Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
-                | SlowShadow | LegacyShadow | SlowVault => {
-                    false
-                }
+                | SlowShadow | LegacyShadow | SlowVault => false,
                 Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
                 Nu6_3 => true,
                 Nu7 => true,
             },
             TxVersion::V6 => match consensus_branch_id {
                 Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
-                | SlowShadow | LegacyShadow | SlowVault
-                | Nu5 | Nu6 | Nu6_1 | Nu6_2 => false,
+                | SlowShadow | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => false,
                 Nu6_3 => true, // Ironwood / NU6.3
                 Nu7 => true,   // ZIP 230 or ZIP 248, whichever is chosen for activation
             },
