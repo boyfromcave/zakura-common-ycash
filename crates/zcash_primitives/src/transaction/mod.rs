@@ -189,7 +189,10 @@ impl TxVersion {
             | BranchId::Blossom
             | BranchId::Heartwood
             | BranchId::Canopy
-            | BranchId::Vault => TxVersion::V4,
+            | BranchId::Vault
+            | BranchId::SlowShadow
+            | BranchId::LegacyShadow
+            | BranchId::SlowVault => TxVersion::V4,
             BranchId::Nu5 => TxVersion::V5,
             BranchId::Nu6 => TxVersion::V5,
             BranchId::Nu6_1 => TxVersion::V5,
@@ -210,23 +213,22 @@ impl TxVersion {
             TxVersion::V3 => consensus_branch_id == Overwinter,
             TxVersion::V4 => match consensus_branch_id {
                 Sprout | Overwinter => false,
-                Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | Nu5 | Nu6 | Nu6_1
-                | Nu6_2 => true,
+                Sapling | Ycash | Blossom | Heartwood | Canopy | Vault | SlowShadow
+                | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
                 Nu6_3 => true,
                 Nu7 => false, // ZIP 2003
             },
             TxVersion::V5 => match consensus_branch_id {
                 // Vault: v4 only (ycashd rejects v5 under Vault).
-                Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault => {
-                    false
-                }
+                Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
+                | SlowShadow | LegacyShadow | SlowVault => false,
                 Nu5 | Nu6 | Nu6_1 | Nu6_2 => true,
                 Nu6_3 => true,
                 Nu7 => true,
             },
             TxVersion::V6 => match consensus_branch_id {
                 Sprout | Overwinter | Sapling | Ycash | Blossom | Heartwood | Canopy | Vault
-                | Nu5 | Nu6 | Nu6_1 | Nu6_2 => false,
+                | SlowShadow | LegacyShadow | SlowVault | Nu5 | Nu6 | Nu6_1 | Nu6_2 => false,
                 Nu6_3 => true, // Ironwood / NU6.3
                 Nu7 => true,   // ZIP 230 or ZIP 248, whichever is chosen for activation
             },
@@ -1145,7 +1147,10 @@ pub mod testing {
             | BranchId::Blossom
             | BranchId::Heartwood
             | BranchId::Canopy
-            | BranchId::Vault => Just(TxVersion::V4).boxed(),
+            | BranchId::Vault
+            | BranchId::SlowShadow
+            | BranchId::LegacyShadow
+            | BranchId::SlowVault => Just(TxVersion::V4).boxed(),
             BranchId::Nu5 => Just(TxVersion::V5).boxed(),
             BranchId::Nu6 => Just(TxVersion::V5).boxed(),
             BranchId::Nu6_1 => Just(TxVersion::V5).boxed(),
