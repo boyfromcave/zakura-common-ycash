@@ -1,0 +1,1470 @@
+{
+ "bucket": "low",
+ "sla_days": 180,
+ "findings": [
+  {
+   "fingerprint": "52341af434032923",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/affected_semver_packages.py",
+   "line": 156,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8efb213fc6325001",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/check_native_backend.py",
+   "line": 17,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "9e7b56dd2bc1d65b",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/check_orchard_backends.py",
+   "line": 21,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "84ed62ee4000fe10",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/check_orchard_backends.py",
+   "line": 66,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b352d45782c6b824",
+   "rule": "python.lang.security.audit.dynamic-urllib-use-detected",
+   "path": ".github/scripts/check_semver.py",
+   "line": 43,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "896b04cd2e1c59ef",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/check_semver.py",
+   "line": 177,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7dc4ec55147a5e41",
+   "rule": "python.lang.security.audit.dynamic-urllib-use-detected",
+   "path": ".github/scripts/publish_crates.py",
+   "line": 76,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7dc4ec55147a5e41-1",
+   "rule": "python.lang.security.audit.dynamic-urllib-use-detected",
+   "path": ".github/scripts/publish_crates.py",
+   "line": 122,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "956bc0a35bd4ae0a",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-audit",
+   "path": ".github/scripts/publish_crates.py",
+   "line": 228,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f7cf0c501d5eb453",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 25,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "6eb5c703b18b18c8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 47,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "fe20df20811a2f32",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 69,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "fe20df20811a2f32-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 69,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "56b1259ebec0045b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 385,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "52571e5c6fbd4859",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 386,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "bb6272b5bfb081ac",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/tests/mod.rs",
+   "line": 387,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "99719de21de56678",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/tests/common/mod.rs",
+   "line": 92,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d05f97002b1099e4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/tests/common/mod.rs",
+   "line": 93,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "be6b11086620eb41",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/bento-core/src/pod/storage.rs",
+   "line": 60,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "e16c60abe6b45328",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/bento-core/src/pod/storage.rs",
+   "line": 96,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4747c3e5aaabb627",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bento/tests/api/fixtures/portability.rs",
+   "line": 342,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "38f75ff303ea532d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bento/tests/api/fixtures/portability.rs",
+   "line": 364,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "a803e5dad27e2d49",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bento/tests/api/fixtures/portability.rs",
+   "line": 365,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b9d156b373dd7b90",
+   "rule": "rust.lang.security.args",
+   "path": "crates/equihash/benches/solver.rs",
+   "line": 14,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f86079d58aa06e92",
+   "rule": "rust.lang.security.args",
+   "path": "crates/equihash/benches/verify.rs",
+   "line": 25,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "01bf34b6f7869c9d",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 146,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "9130b1aa6d7d3f91",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 188,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "3243f57e484faf31",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 223,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "dc641df55fa3e1b4",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 305,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b4a12aac9565a84c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 418,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "105fe6fd077f69a5",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 493,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4b1d180b051026d2",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 533,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b16aebf0d7c4dab3",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 568,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "888ef22cc9d69057",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 589,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "354c195d2f84f1cf",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 629,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "092ade0cd82ceab4",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 714,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "fa87c37a8a0ef753",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/blake2b/native.rs",
+   "line": 725,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "70c884617697ad04",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 127,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "36ab302e598817b8",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 165,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f1902af4b9b18109",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 234,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d86b29885be30c64",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 273,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f1d5885733ccf54a",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 383,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c1d975ab365461f1",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 385,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "82b3020f6d323f40",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash.rs",
+   "line": 387,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d185e620897572f6",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/aarch64.rs",
+   "line": 166,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "2fcd36654a601e57",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/aarch64.rs",
+   "line": 175,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "2d9bdffaadf2aee7",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 27,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f27381af5a6438d4",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 31,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "6512c45b2d202351",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 35,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f93e0a5b9e317ea8",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 39,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4981f2445dd79d28",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 43,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b17573d2df78ffb6",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 47,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4628943fd3084355",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 51,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4bb3abfb3db3aadb",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 61,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7a7e2e43639eb3cd",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 71,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "05d952f1626209c0",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/leaf_hash/x86_64.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7987fa479f1bcb66",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver.rs",
+   "line": 112,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "3716cdca713056da",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver/memory.rs",
+   "line": 31,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "903ae0404b88560c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver/memory.rs",
+   "line": 48,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d7ef06043d122a2c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver/memory.rs",
+   "line": 68,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f7a2a1b4a90d996a",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver/memory.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f6f646517311ec97",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/equihash/src/tromp/solver/memory.rs",
+   "line": 97,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "9a60827e847bcbc0",
+   "rule": "rust.lang.security.current-exe",
+   "path": "crates/equihash/src/verify/compatibility.rs",
+   "line": 324,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8a569e7e27011a9b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/benches/poseidon.rs",
+   "line": 100,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b0cef7d674015711",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 86,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "e0be854cda9f375b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 93,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "cde180fff0559d43",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 99,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b0cef7d674015711-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 128,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "e0be854cda9f375b-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 135,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "cde180fff0559d43-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/benches/plonk.rs",
+   "line": 141,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d85ef59b4cd9c441",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 72,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4c3178b2abed48fa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 79,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "dbfdc22fba1d3f90",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 82,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "bcaa585892536476",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 87,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f632f09753267de6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 90,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d85ef59b4cd9c441-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 109,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "87b33d7e9e8cf120",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 116,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "dbfdc22fba1d3f90-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 119,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8a84665575fca090",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 124,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f632f09753267de6-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/circuit-layout.rs",
+   "line": 127,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "fdd5a8dbe566c7fa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 157,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7194d0ce2b227025",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 160,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8200844b9b080c96",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 193,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c1a8ebe93a51871f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 194,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "98bed64fd7f6fdba",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 195,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f61530abe1188746",
+   "rule": "rust.lang.security.args-os",
+   "path": "crates/halo2_proofs/examples/cost-model.rs",
+   "line": 373,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "1c7482645fbe842e",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 37,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b14c168c1baa615f",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 64,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "a2f82f2693a4433c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 112,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c90772139c277c9e",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 158,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "19edcdfda30d8694",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 279,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "2be761f81fe989bb",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 337,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5563275daa463830",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 364,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "83f566ab20f2a7a7",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 407,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "022826f771724c47",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 434,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "cad9db9c85331acf",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 442,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "269be43de5c59da0",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 459,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "a0f15ad282fe5284",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 471,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "69d78d35cb79efdc",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 503,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c6b2f02c86989542",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 518,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "69d78d35cb79efdc-1",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 562,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "46a68c53b0b0fb2c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 577,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "0e172485b05cba89",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1/legacy_pdqsort.rs",
+   "line": 673,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "def9c7464c6483ed",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 120,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "0a69c228f1327e62",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 127,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "405b0f11343eeaa5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 133,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5710ad43523f057d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 139,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "ace678e255250e5c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 145,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "def9c7464c6483ed-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 174,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "0a69c228f1327e62-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 181,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "405b0f11343eeaa5-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 187,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5710ad43523f057d-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 193,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "ace678e255250e5c-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/tests/plonk_api.rs",
+   "line": 199,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7664d88559de6556",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/tests/composition_api.rs",
+   "line": 151,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "781029ce8f8a2495",
+   "rule": "generic.secrets.gitleaks.square-access-token",
+   "path": "crates/pasta_curves/sage/uv.lock",
+   "line": 1361,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "a75fb75e941a3d4c",
+   "rule": "generic.secrets.gitleaks.square-access-token",
+   "path": "crates/pasta_curves/sage/uv.lock",
+   "line": 1704,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f34deb3709fc446b",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/deferred/aarch64.rs",
+   "line": 36,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "830fe80ae1695f09",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/deferred/aarch64.rs",
+   "line": 171,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "36d2eff056e22708",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 93,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "06a27521de3a871f",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 150,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "243c6392890112e0",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 232,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c0dec432c02c8ae3",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 449,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4a552f33c96b97b4",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 651,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "c09dd8ade47e9c06",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 682,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "93336f804ef0fc45",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/aarch64_asm.rs",
+   "line": 694,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "2a806961cc1c38c3",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/x86_64_asm.rs",
+   "line": 100,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "585a96d39b65325a",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/x86_64_asm.rs",
+   "line": 154,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "0c598c3501521dcb",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/x86_64_asm.rs",
+   "line": 214,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "36bfd3070c662c20",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/fields/x86_64_asm.rs",
+   "line": 444,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "17ac8fd14601c078",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/glv.rs",
+   "line": 2096,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "fd95a511083d40a0",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/glv.rs",
+   "line": 2100,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "72aa34a66ca656ea",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/glv/zero.rs",
+   "line": 202,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "64f29f10c99beec7",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/glv/zero.rs",
+   "line": 269,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "bdadedd8ceceeb29",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/pasta_curves/src/glv/zero.rs",
+   "line": 288,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "9b21c4a034702d37",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/tests/support/cursor.rs",
+   "line": 18,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5a8924f1964d6c5d",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 33,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "df5c36d44fd0c6e2",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 61,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b304383520616b90",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 69,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "25330826f7e80e9b",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 77,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "a9eb585bc8301c6c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 85,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5a8924f1964d6c5d-1",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 149,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "df5c36d44fd0c6e2-1",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 177,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b304383520616b90-1",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 185,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4baf647ec72f4421",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 193,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "e072865d53eaa00a",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/curve/consumer/adapter.rs",
+   "line": 203,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "83a4514b95438373",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 272,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b08ae48240e63759",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 313,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "0ee82c34f24bff00",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 314,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b3431729ffd5796a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 316,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "36c377118f9384f8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 317,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "1636193f14ec9079",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/tests/admission.rs",
+   "line": 335,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "818018415b29b675",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 63,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "1b1eaa363df11bde",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 266,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "06080dc87529a13f",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 316,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "9179f8c7bbc2bf6c",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 355,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "02198709de8bce40",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 400,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "e4e0a6649bbe8a00",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 583,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "31e6066d704fcaad",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 738,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "f22e4777a104d735",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 759,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8fd17d3cbd46a6b7",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/mod.rs",
+   "line": 776,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "df81612dc003420d",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/products.rs",
+   "line": 40,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "ad9c4a55605c97b5",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/aarch64_asm/products.rs",
+   "line": 175,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "2ee2a3c191ffc30f",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/consumer/adapter.rs",
+   "line": 47,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "419e15b0bb5da033",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/consumer/adapter.rs",
+   "line": 75,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d8d71cbcfa7681b4",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/consumer/adapter.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4e69d129d8bc53ac",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/consumer/adapter.rs",
+   "line": 91,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5877badb28f9e06e",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/consumer/adapter.rs",
+   "line": 101,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "15f40d2d089f966f",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 484,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "ae4cb9084cccf672",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 521,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "b4e543119056fdfe",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 573,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4d9456470a0d0ba8",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 615,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5523adeb23bd6946",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 646,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "6347309121467073",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 684,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "82a655b26a57de9e",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/mod.rs",
+   "line": 726,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "5f91df55473d7a79",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/products.rs",
+   "line": 99,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7cf8ffd3abb44c38",
+   "rule": "rust.lang.security.unsafe-usage",
+   "path": "crates/udon/src/field/x86_64_asm/products.rs",
+   "line": 163,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "8f78a820b40a8bd2",
+   "rule": "generic.secrets.gitleaks.generic-api-key",
+   "path": "crates/udon/tests/fixtures/manifest.json",
+   "line": 5,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "7b02e5a0905b856d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/tests.rs",
+   "line": 826,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "05d68540a0861f34",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/tests.rs",
+   "line": 827,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "db1b2c13c5200a1f",
+   "rule": "generic.secrets.gitleaks.generic-api-key",
+   "path": "crates/zcash_script/src/descriptor.rs",
+   "line": 288,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "896ff6786e73f645",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/test_vectors.rs",
+   "line": 71,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "4fddd6da281f766f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/test_vectors.rs",
+   "line": 73,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  },
+  {
+   "fingerprint": "d10e123da53e5734",
+   "rule": "python.lang.security.audit.dynamic-urllib-use-detected",
+   "path": "scripts/verify_crates_io.py",
+   "line": 124,
+   "first_seen": "2026-11-03",
+   "due": "2027-05-02"
+  }
+ ]
+}
