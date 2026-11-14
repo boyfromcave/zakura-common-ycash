@@ -1,0 +1,2518 @@
+{
+ "bucket": "medium",
+ "sla_days": 90,
+ "findings": [
+  {
+   "fingerprint": "0d60356dcea7442c",
+   "rule": "python.lang.security.audit.dangerous-subprocess-use-tainted-env-args",
+   "path": ".github/scripts/check_semver.py",
+   "line": 178,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "57e4849c3a0fb997",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/domain.rs",
+   "line": 75,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b058b8a79907fe8f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/domain.rs",
+   "line": 76,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f076e2c796800cd8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/domain.rs",
+   "line": 77,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8e4aa2b52f72c27e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/boolean.rs",
+   "line": 525,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "dc0e259b18926991",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/boolean.rs",
+   "line": 632,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f416c5f5a94c154d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/num.rs",
+   "line": 95,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b53ec8da05b1be9f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/num.rs",
+   "line": 101,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3513944e941e3485",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/num.rs",
+   "line": 145,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "96efeb4826b03325",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/num.rs",
+   "line": 162,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "65424d7a1da57a4a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/gadgets/num.rs",
+   "line": 295,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "4fa85823262ccb7c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/generator.rs",
+   "line": 226,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "4fa85823262ccb7c-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/generator.rs",
+   "line": 234,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 60,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790-2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 171,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790-3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 183,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790-4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 307,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f78a785a7d1c790-5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/mod.rs",
+   "line": 335,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6fcdf70a83c8393c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bellman/src/groth16/verifier/batch.rs",
+   "line": 509,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "28b0c13499bfbd4d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bento-macros/src/proc/addition_chain/mod.rs",
+   "line": 151,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "170078294a4116b0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bento-macros/src/proc/addition_chain/mod.rs",
+   "line": 192,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "47afa9863f5b9866",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 235,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "be1af42b6dc02a92",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 236,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "586668ef39e452b0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 237,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "32576077555adaa7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 238,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d336f90f6afff6f6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 239,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f3a8ce215ad54aad",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 240,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8f5dacf5e152eddd",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 241,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "19c8913cfb44167d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 242,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c7a135af718c3ca5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 243,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f0207db4a10e95e4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 244,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e2855c65c1ce3c60",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 245,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9697b4be69eae753",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/fp.rs",
+   "line": 246,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7cad371b41a0d0ad",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/g1.rs",
+   "line": 974,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2b50ed6c73397ee0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/bls12_381/src/g2.rs",
+   "line": 1119,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e6565dd32383649b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/equihash/src/verify/compatibility.rs",
+   "line": 124,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "88532faa51934836",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul.rs",
+   "line": 454,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "899e7c780011f024",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul_fixed/base_field_elem.rs",
+   "line": 191,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "63fcc3fa747f6aff",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul_fixed/base_field_elem.rs",
+   "line": 229,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f9289e516b169572",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul_fixed/short.rs",
+   "line": 104,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cf6884866023b43b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul_fixed/short.rs",
+   "line": 174,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "554517ae89905068",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/mul_fixed/short.rs",
+   "line": 225,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a946ae6632d1a00a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/witness_point.rs",
+   "line": 135,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a946ae6632d1a00a-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/witness_point.rs",
+   "line": 158,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a946ae6632d1a00a-2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/ecc/chip/witness_point.rs",
+   "line": 180,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e08c1b53575d219c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon.rs",
+   "line": 175,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ceff05b2b5a07ea9",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 299,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "dcfae97baffd303c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 385,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e2fa0fe14c9387bc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 525,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0aa3a9c0e7f781e0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 577,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "74d9c862bcd4fb87",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 655,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "280c91c393e62a53",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 668,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "132ef98e7f45a526",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/poseidon/pow5.rs",
+   "line": 777,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "104a0356305a1cb6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/sinsemilla/chip/hash_to_point.rs",
+   "line": 335,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6efedffa598fc042",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/sinsemilla/chip/hash_to_point.rs",
+   "line": 336,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fa01567394b36359",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/sinsemilla/chip/hash_to_point.rs",
+   "line": 622,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fa01567394b36359-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/sinsemilla/chip/hash_to_point.rs",
+   "line": 677,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "85ad7fdc1041af70",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/sinsemilla/merkle/chip.rs",
+   "line": 437,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7ad42f91191a4b81",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/test_circuits/test_utils.rs",
+   "line": 43,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9523244b381257d8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/utilities/decompose_running_sum.rs",
+   "line": 201,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8afb8a269cd03a4d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/utilities/lookup_range_check.rs",
+   "line": 221,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e8963235296c0abc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_gadgets/src/utilities/lookup_range_check.rs",
+   "line": 919,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f7389d38012e683e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/single_pass.rs",
+   "line": 181,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c31c165bc7d7ddbf",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1.rs",
+   "line": 446,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1d0c4ecec1591e5b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1.rs",
+   "line": 522,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0227fb35a991a209",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1.rs",
+   "line": 685,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0227fb35a991a209-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/floor_planner/v1.rs",
+   "line": 810,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "21169a26bfb983c3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/circuit/table_layouter.rs",
+   "line": 160,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9501a55770ca91e2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev.rs",
+   "line": 348,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b7e44177f5ed4fdb",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev.rs",
+   "line": 620,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "aa8dafb2843abe4b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev.rs",
+   "line": 636,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "26eaeb2bd4cb8873",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev.rs",
+   "line": 839,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1f6646d96e934ae2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev.rs",
+   "line": 869,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d83754d385c9ef97",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/dev/graph/layout.rs",
+   "line": 99,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fff78e2b6e179707",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/keygen.rs",
+   "line": 632,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "49befd61ed8b4e7a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/keygen.rs",
+   "line": 633,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5808566f6df97ebf",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/keygen.rs",
+   "line": 634,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "10c5e0d88081fb22",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1173,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3bc8274468f5156d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1688,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "014c49ecd857bd2e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1694,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "dfaccf011f5b171a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1700,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "84b000731bee9b18",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1709,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3bc8274468f5156d-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1734,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf96c9c3d33a8079",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1748,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7e4a3a0baf039738",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1755,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6d1c9b174a9a31d3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 1759,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7d3e8b5b91ffad2c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 2204,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a6fccd86ce6a6a85",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 2559,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b9013a7ce03dfad5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/lookup/prover.rs",
+   "line": 2615,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0bf5c8a5411698b8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/permutation/prover.rs",
+   "line": 1775,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a1cb264e563c6b11",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/permutation/prover.rs",
+   "line": 1816,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b853f96cc3e26699",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover.rs",
+   "line": 1578,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "076c012eb0658c4e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover.rs",
+   "line": 1718,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f7650a441f154d32",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover.rs",
+   "line": 1952,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fb64ded6c36997d0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint.rs",
+   "line": 347,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fb64ded6c36997d0-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint.rs",
+   "line": 361,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fb64ded6c36997d0-2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint.rs",
+   "line": 379,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fb64ded6c36997d0-3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint.rs",
+   "line": 393,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fe948793b0d2c69b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 84,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ad3b8f0e885e5199",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 320,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3b50b68a54a4b4c0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 321,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "63d608984dbe44ba",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 329,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9e98ec0826886e9d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 330,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "467a2ab804172a49",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/plonk/prover_fingerprint/vesta_lean.rs",
+   "line": 331,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "130a48f148ec0fe6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/poly/commitment/prover.rs",
+   "line": 408,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c4c5691c02041572",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/poly/multiopen/verifier.rs",
+   "line": 78,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f797f7acd3bfb197",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/halo2_proofs/src/poly/multiopen/verifier.rs",
+   "line": 84,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "38035a7a8446aaaa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/jubjub/src/lib.rs",
+   "line": 1258,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d9759aed214c4956",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/backend/halo2/constants/fixed_bases.rs",
+   "line": 602,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c0e25cf39eb4cb15",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/bundle.rs",
+   "line": 644,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "43a5ced18b394350",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 23,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "4ec7a7113d24ad14",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 28,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c2881ef17c7790d1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 36,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7f69ece3848cde23",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 37,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "12c03d1260b817ba",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 38,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "241830732e7853ce",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 39,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1c16abaaf8d8c4c1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 40,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1e2721411cbee737",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 59,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b22a5a7092e4dec2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/compatibility.rs",
+   "line": 65,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "21c633c0f814800f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1451,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "10178b219b0c2bd0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1452,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "20f13157678cf008",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1865,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8243bdcb40abb001",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1870,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ad0210182a4dc3b9",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1878,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "196c4449464b5ceb",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1879,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8c1503e4e827f0c5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1880,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "58113448db3a320b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1881,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "caf0b4ce196ebb27",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1882,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a888b90bbd93c0a8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1901,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5c60f20806c7bc9e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2.rs",
+   "line": 1907,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "038c89acf0a829b1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/commit_ivk.rs",
+   "line": 859,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5f2d2f51b3113a63",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/note_commit.rs",
+   "line": 2182,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "46d6fa51b3372181",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/note_commit.rs",
+   "line": 2186,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5f2d2f51b3113a63-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/note_commit.rs",
+   "line": 2200,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "46d6fa51b3372181-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/note_commit.rs",
+   "line": 2204,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8d7f03a525a02b18",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/note_commit.rs",
+   "line": 2271,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9e995559f330642c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/orchard/src/circuit/halo2/prover_fingerprint.rs",
+   "line": 62,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e1ec3ea8c5c2b463",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa-frost/src/redjubjub.rs",
+   "line": 51,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bdbe19bf8617dc12",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa-frost/src/redpallas.rs",
+   "line": 56,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a3df083635877dbc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa/src/batch.rs",
+   "line": 230,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a4850f057429331d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa/src/batch.rs",
+   "line": 239,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "dec97fbd79da41d7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa/src/batch.rs",
+   "line": 307,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d8361691f35545ba",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/reddsa/src/verification_key.rs",
+   "line": 189,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0d42ad3bc3b0fcd2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/builder.rs",
+   "line": 839,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1f48ee453d74f76a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/builder.rs",
+   "line": 842,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e678b76ca844b6ab",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit.rs",
+   "line": 243,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e678b76ca844b6ab-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit.rs",
+   "line": 455,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f020d4f0e7b4c2f7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 66,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "faf560c336a54cd6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 223,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "42ab5cd2044332ef",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 233,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f020d4f0e7b4c2f7-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 242,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "85674506309806bf",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 333,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "85674506309806bf-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 359,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf8f361a8bc66fbc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 434,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf8f361a8bc66fbc-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 459,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf8f361a8bc66fbc-2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 496,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf8f361a8bc66fbc-3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 518,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf8f361a8bc66fbc-4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/ecc.rs",
+   "line": 559,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "093f54b1086c9d19",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/pedersen_hash.rs",
+   "line": 40,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "edf09aee3ee79206",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/pedersen_hash.rs",
+   "line": 78,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "58052f91bb567081",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/circuit/pedersen_hash.rs",
+   "line": 104,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a624b4bd906c3ae4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/keys.rs",
+   "line": 295,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "991def01bd4fedb4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/keys.rs",
+   "line": 297,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "34d185c1f4942b17",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/keys.rs",
+   "line": 434,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cbc33392356aaed2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sapling-crypto/src/keys.rs",
+   "line": 435,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d5fe958ffd8d7c7b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/commitment_tables.rs",
+   "line": 48,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f946127ba0e81564",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/commitment_tables.rs",
+   "line": 52,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b84c11b6a2d8fd51",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/fft.rs",
+   "line": 14,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a3731e784e4581fe",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/fft.rs",
+   "line": 39,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f3c0c8cab7cdd24e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/fft.rs",
+   "line": 41,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2be86deccbe7ad7a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/fixed_columns/mod.rs",
+   "line": 93,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "33afd25b332496df",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/points/mod.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2f6b2307139fb760",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/points/mod.rs",
+   "line": 118,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "32e10e1022d8b386",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/points/window_bases.rs",
+   "line": 51,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b8a7572acab8341f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/points/window_bases.rs",
+   "line": 98,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f161bf29f51b1f0e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/polynomials/values.rs",
+   "line": 18,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7bb490ea0d784554",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/polynomials/values.rs",
+   "line": 32,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2e5476969f9762e8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/raw/permutation.rs",
+   "line": 36,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "addebe658b658a86",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei-artifacts/src/raw/points.rs",
+   "line": 47,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c18f1e64573f5562",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 231,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a103d0a3e5c1de09",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 240,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "543ddc9da1e57944",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 288,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1ad2b62beb2f3dfa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 311,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "aa16cc64c577ea31",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 311,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "76085362d3aa0da3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 716,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "959a3d2c62c4f92b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/commitment/msm.rs",
+   "line": 745,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ce431ebc3166ce20",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/mod.rs",
+   "line": 335,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "57df78ee0df74a83",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/preflight/reference.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "575ba2b598485fdc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/preflight/reference.rs",
+   "line": 90,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3814bc8a53806bcf",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/ipa/generators.rs",
+   "line": 158,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "43dc882ba166f4c9",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/ipa/run.rs",
+   "line": 307,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d4e8476357c4d241",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/ipa/run.rs",
+   "line": 309,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ea823b3fee9156d7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/ipa/run.rs",
+   "line": 732,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6150093884091202",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/ipa/run.rs",
+   "line": 742,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "31125418c894c18c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/lookup.rs",
+   "line": 1674,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a9b354e12c52edfe",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/mod.rs",
+   "line": 431,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "341c5cebb1b42585",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/mod.rs",
+   "line": 432,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1ccad7685c1a80f4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/opening.rs",
+   "line": 718,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fd09f97b12f83aa9",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/opening.rs",
+   "line": 720,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "77e12975ddacb148",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/opening.rs",
+   "line": 786,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bf87dccb6829393e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/opening/reference.rs",
+   "line": 363,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "12ee1ed353af4c4e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/opening/reference.rs",
+   "line": 406,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "abaf9ba61b1246f7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/products/permutation.rs",
+   "line": 246,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8e4855c8a42a9bc5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/products/permutation.rs",
+   "line": 284,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "60ffa71de4323b5e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/rows.rs",
+   "line": 605,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e68e1c88728d193d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/rows.rs",
+   "line": 680,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cd9111359a1e2bd8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/rows.rs",
+   "line": 684,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7ae30efd239ea83a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/rows.rs",
+   "line": 792,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f48a04aeecc81f03",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/rows.rs",
+   "line": 961,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "519f358adc269a0b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/run.rs",
+   "line": 996,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "dd7aa0acaf9523e2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/run.rs",
+   "line": 1007,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "4b0fb01223aacc87",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/run.rs",
+   "line": 1019,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f67ce0699f518bc8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/run.rs",
+   "line": 1101,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d68fe35fd28ab5aa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/prover/quotient/run.rs",
+   "line": 1114,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d8ac2164eae86d3c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/transcript.rs",
+   "line": 187,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "2140ab7b561aab12",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 317,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d6ca07cb70341cc8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 451,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e2df73e9cb3d1a3e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 452,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e2df73e9cb3d1a3e-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 714,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "661db78e8a483eae",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 848,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d2418e11cd867afb",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/native/verifier/mod.rs",
+   "line": 853,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "02eab9a3683a3701",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/redpallas.rs",
+   "line": 405,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "82e50523e6ac2dea",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/redpallas.rs",
+   "line": 407,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6cbd9bd9290cb9f0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/sensei/src/test_codec/codec.rs",
+   "line": 32,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "59d7b5e12fcd8c2d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/curve/pasta/fixed_base.rs",
+   "line": 228,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f94c4dcd0e8a1531",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/exec/execution/test_pool.rs",
+   "line": 69,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "22baa3f9535bb62e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/driver.rs",
+   "line": 285,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7f59f8b209239be1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/driver.rs",
+   "line": 311,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "10f061ef719e172e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/driver.rs",
+   "line": 314,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "32617b4957db6484",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/expansion.rs",
+   "line": 69,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "829d42c03e1c08d1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/expansion.rs",
+   "line": 93,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "17cd1960d1f4f9a6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/expansion.rs",
+   "line": 382,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "54560379d40a48cc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/interpolation.rs",
+   "line": 86,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c9f4c75c9987b4f5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/interpolation.rs",
+   "line": 111,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a4898ef7aa613caa",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/mod.rs",
+   "line": 105,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0627229810e0df8c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/mod.rs",
+   "line": 118,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "76b89f81cd30c963",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/mod.rs",
+   "line": 119,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "84838d965153cef3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/execution/mod.rs",
+   "line": 1214,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 285,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 313,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884-2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 342,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884-3",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 379,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884-4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 410,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "fc9a5ddbd23ec884-5",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 449,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7fcf5ce6c4078067",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/transform.rs",
+   "line": 461,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3193825505371f3c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/vanishing.rs",
+   "line": 90,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5a5d13325e29fe1c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/fft/vanishing.rs",
+   "line": 110,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6aac70a39e80083a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/field/pasta/batch.rs",
+   "line": 145,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cd7d26029fd33ed7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/field/pasta/batch.rs",
+   "line": 157,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5d78459db5a399cd",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/chunks.rs",
+   "line": 63,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bd4aa48e9a3d9bce",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/chunks.rs",
+   "line": 83,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "39381b0837557d19",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/mod.rs",
+   "line": 612,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3a4dc20181604ebd",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/mod.rs",
+   "line": 631,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "85c2e732c82c3645",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/mod.rs",
+   "line": 654,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "b1ae1d33b529dc5b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/mod.rs",
+   "line": 697,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "5f20b3b05bb82383",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/execution/mod.rs",
+   "line": 798,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f3df3c2ed3ced5e1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/matrix.rs",
+   "line": 186,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d41e5fc083b74d2a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/matrix.rs",
+   "line": 342,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "11ff2b8963a87620",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/matrix.rs",
+   "line": 346,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "07d9dbe36262b510",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/schedule.rs",
+   "line": 393,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "07d9dbe36262b510-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/schedule.rs",
+   "line": 520,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9dfaef325b036917",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/schedule.rs",
+   "line": 524,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "57fd8c339a47b5c0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/wnaf.rs",
+   "line": 205,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cfaad68d52b258bb",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/wnaf.rs",
+   "line": 318,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "07f0f123c3f1eba6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/msm/wnaf.rs",
+   "line": 322,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bd18250e34bd9afc",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/udon/src/polynomial/interpolation.rs",
+   "line": 298,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9582bd81d89bf42e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_address/src/encoding.rs",
+   "line": 123,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "35fb372634a74f5b",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_address/src/kind/unified.rs",
+   "line": 268,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6424282c558aec60",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_address/src/kind/unified.rs",
+   "line": 321,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6c32dabbce2ddc75",
+   "rule": "generic.secrets.security.detected-mailgun-api-key",
+   "path": "crates/zcash_keys/src/encoding.rs",
+   "line": 509,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0833d8ed31974b2e",
+   "rule": "generic.secrets.security.detected-mailgun-api-key",
+   "path": "crates/zcash_keys/src/encoding.rs",
+   "line": 510,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "0526b2bfc02acfb7",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_keys/src/keys.rs",
+   "line": 470,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a1ac6f564b1e0503",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_keys/src/keys.rs",
+   "line": 472,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "ae57ec60fd9637ea",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_keys/src/keys.rs",
+   "line": 474,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "cde36fbbcb9b71b8",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_keys/src/keys/zcashd.rs",
+   "line": 130,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "8f6b6424ad9a7bf1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/block.rs",
+   "line": 222,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "16548169cfe51076",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/block.rs",
+   "line": 253,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f800bb17f4151d62",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/merkle_tree.rs",
+   "line": 124,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "af1ecdeb8cd6d0b4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 551,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e293e71400b9b031",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1348,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a2a3d319765a005f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1444,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "7edf908239a7708e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1737,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "37926eb709a48dfd",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1751,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "877f5fcadd1e1622",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1759,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6e6668d04b1a5b7c",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1770,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "d2336ee0d6632378",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1785,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "85fc4ca07122472f",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1816,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "69b68e64f241d754",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/builder.rs",
+   "line": 1937,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3e27c0f2942758ec",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/components/orchard.rs",
+   "line": 111,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "75bf7bb763860679",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/components/orchard.rs",
+   "line": 234,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "155e90943a25de52",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/components/orchard.rs",
+   "line": 248,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c5ae4e27b78dcfd9",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_primitives/src/transaction/components/sapling.rs",
+   "line": 432,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "61cb6c8dc09d85d4",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_proofs/src/circuit/sprout/mod.rs",
+   "line": 84,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "563cf8c7f0397631",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_proofs/src/lib.rs",
+   "line": 197,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1f8713914724cfe6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_protocol/src/memo.rs",
+   "line": 220,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "f909ffb170f9a006",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/descriptor.rs",
+   "line": 246,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "3dbf77fa1038ee3e",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/descriptor/encoding.rs",
+   "line": 48,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "bc51e41ca3e997ae",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/descriptor/encoding.rs",
+   "line": 105,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6b79a84457c9931a",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/opcode/mod.rs",
+   "line": 871,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "4479aa9617240f64",
+   "rule": "rust.lang.security.insecure-hashes",
+   "path": "crates/zcash_script/src/opcode/mod.rs",
+   "line": 950,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "9aa40bec2df94474",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/pattern.rs",
+   "line": 130,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "27c3fa65138996f2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_script/src/pattern.rs",
+   "line": 159,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "e557c941df8f81e2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/builder.rs",
+   "line": 686,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "138df04cf4bbf895",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/keys.rs",
+   "line": 474,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "1e1ea4deeb7ce444",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/keys.rs",
+   "line": 483,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "138df04cf4bbf895-1",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/keys.rs",
+   "line": 556,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c08e2f15ec3843c2",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 180,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "c9f26658942051a6",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 185,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "83b437df8e2ddf6d",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 195,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "a3d212a839110284",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 198,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "803d49ddb886bba0",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 201,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "6abcb845bce601fe",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 213,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  },
+  {
+   "fingerprint": "38ed55ea30a16699",
+   "rule": "trailofbits.rs.panic-in-function-returning-result",
+   "path": "crates/zcash_transparent/src/pczt/spend_finalizer.rs",
+   "line": 215,
+   "first_seen": "2026-11-03",
+   "due": "2027-02-01"
+  }
+ ]
+}
