@@ -52,6 +52,9 @@ impl AffineRows {
     /// neighbours 0, 1, and 2 are the previous, current, and next rows.
     /// The nonempty Action weights are fixed for this task and end in one.
     #[inline]
+    // zakura-common-ycash (2026-11-15): `r` is also the neighbour index passed to `value`, so
+    // the range loop stays; clippy 1.100.0 flags it (.github/README-ycash.md "The Rust toolchain").
+    #[allow(clippy::needless_range_loop)]
     pub(super) fn advance(
         &mut self,
         first: bool,

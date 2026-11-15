@@ -44,6 +44,9 @@ fn fixed_vk_and_instance_prefix_is_deterministic() {
 /// dense — under arbitrary tail masks and blind equals its dense
 /// commitment.
 #[test]
+// zakura-common-ycash (2026-11-15): `column_index` also seeds the values and labels the
+// assertions, so the range loop stays; clippy 1.100.0 flags it (.github/README-ycash.md).
+#[allow(clippy::needless_range_loop)]
 fn structured_advice_commitments_match_dense_on_fixtures() {
     use crate::native::regions::{fixed_base_windows, sinsemilla_hashes, variable_base_mul};
     use crate::native::{commitment::normalized, witness};
