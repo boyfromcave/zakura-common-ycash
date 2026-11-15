@@ -1,18 +1,22 @@
 # The development toolchain: the compiler that `cargo`, `cargo clippy`, and
 # `cargo fmt` run on in a checkout, so every local build, lint, and benchmark
-# uses the same release (crates/orchard/benches/README.md pins this same
-# release for comparable measurements).
+# uses the same release (crates/orchard/benches/README.md pins its own release
+# with `cargo +<ver>` for comparable measurements).
 #
 # This is deliberately newer than the minimum supported Rust version the
 # published crates promise, which is [workspace.package] rust-version in
 # Cargo.toml (1.97). Raising the MSRV is a consumer-visible change that needs
 # a changelog entry; bumping this pin is not. CI keeps both honest: its
-# `cargo +1.97.0` lanes build against the MSRV and its `cargo +stable` lanes
-# track the latest stable release, independently of this file. To run the
-# MSRV check locally:
+# `cargo +1.97.0` lanes build against the MSRV and its `cargo +1.100.0` lanes
+# build with this pin. To run the MSRV check locally:
 #
 #     rustup toolchain install 1.97.0 --profile minimal
 #     cargo +1.97.0 check --locked --workspace
+#
+# zakura-common-ycash (2026-11-15): pinned to the release kogany builds with,
+# and the CI lanes that tracked `stable` now name it too, so a compiler release
+# cannot change a build in the middle of qualification. To bump it, see
+# .github/README-ycash.md, "The Rust toolchain".
 [toolchain]
-channel = "1.97.1"
+channel = "1.100.0"
 components = ["clippy", "rustfmt"]

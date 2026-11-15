@@ -48,7 +48,7 @@ run_check() {
 }
 
 run_check "Stable supported-feature check" \
-  cargo +stable check --locked "${feature_args[@]}" --all-targets \
+  cargo +1.100.0 check --locked "${feature_args[@]}" --all-targets \
   "${package_args[@]}"
 
 lint_args=()
@@ -56,11 +56,11 @@ if [[ "$deny_warnings" == true ]]; then
   lint_args+=(-- -D warnings)
 fi
 run_check "Stable Clippy" \
-  cargo +stable clippy --locked "${feature_args[@]}" --all-targets --no-deps \
+  cargo +1.100.0 clippy --locked "${feature_args[@]}" --all-targets --no-deps \
   "${package_args[@]}" "${lint_args[@]}"
 
 if [[ "$run_tests" == true ]]; then
-  run_check "Stable tests" cargo +stable test --locked "${package_args[@]}"
+  run_check "Stable tests" cargo +1.100.0 test --locked "${package_args[@]}"
 fi
 
 run_check "MSRV check" \
