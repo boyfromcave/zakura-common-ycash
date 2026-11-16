@@ -68,6 +68,11 @@ def check_composition_visibility():
             artifact = next(Path(filename) for item in reversed(artifacts)
                             if item.get("reason") == "compiler-artifact" and item.get("package_id") == orchard_id
                             for filename in item["filenames"] if filename.endswith(".rmeta"))
+            # zakura-common-ycash (2026-11-15): Cargo 1.100 builds each package in its own
+            # directory, not one shared `deps`, so every artifact's directory is a search path.
+            dependency_dirs = sorted({str(Path(filename).parent) for item in artifacts
+                                      if item.get("reason") == "compiler-artifact"
+                                      for filename in item["filenames"]})
             snippets = [(name, code, selected == "circuit-composition") for name, code in public.items()]
             snippets.extend((name, code, False) for name, code in private.items())
             if selected == "circuit-composition":
@@ -77,7 +82,8 @@ def check_composition_visibility():
                 result = subprocess.run([
                     "rustc", "--edition=2024", "--crate-type=lib", "--emit=metadata", "--error-format=json",
                     "--out-dir", temporary, "--extern", f"orchard={artifact}",
-                    "-L", f"dependency={artifact.parent}", str(source),
+                    *(argument for directory in dependency_dirs for argument in ("-L", f"dependency={directory}")),
+                    str(source),
                 ], capture_output=True, text=True)
                 diagnostics = [json.loads(line) for line in result.stderr.splitlines() if line.startswith("{")]
                 errors = [item for item in diagnostics if item.get("level") == "error" and item.get("code")]

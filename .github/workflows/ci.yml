@@ -318,7 +318,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
         with:
           components: clippy
       - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
@@ -457,7 +457,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run tests
         shell: bash
         env:
@@ -474,7 +474,7 @@ jobs:
           if [[ -n "$STAGE_FEATURE" ]]; then
             features="$features,$STAGE_FEATURE"
           fi
-          cargo +stable test --verbose --release \
+          cargo +1.100.0 test --verbose --release \
             -p zakura-halo2-gadgets \
             -p zakura-halo2-poseidon \
             -p zakura-halo2-proofs \
@@ -499,10 +499,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Compile tests
         run: >-
-          cargo +stable test --verbose --release
+          cargo +1.100.0 test --verbose --release
           -p zakura-halo2-gadgets
           -p zakura-halo2-poseidon
           -p zakura-halo2-proofs
@@ -511,7 +511,7 @@ jobs:
           --no-run
       - name: Test platform randomness and polynomial arithmetic
         run: >-
-          cargo +stable test --verbose --release
+          cargo +1.100.0 test --verbose --release
           -p zakura-halo2-gadgets
           -p zakura-halo2-poseidon
           -p zakura-halo2-proofs
@@ -649,18 +649,18 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run tests
-        run: cargo +stable test -p zakura-orchard --verbose
+        run: cargo +1.100.0 test -p zakura-orchard --verbose
       - name: Test composition witness encodings
-        run: cargo +stable test -p zakura-orchard --locked --features circuit-composition --lib composition_tests
+        run: cargo +1.100.0 test -p zakura-orchard --locked --features circuit-composition --lib composition_tests
       - name: Test public circuit composition without default features
-        run: cargo +stable test -p zakura-orchard --locked --no-default-features --features circuit-composition,test-dependencies --test composition_api
+        run: cargo +1.100.0 test -p zakura-orchard --locked --no-default-features --features circuit-composition,test-dependencies --test composition_api
       - name: Test composition API privacy documentation
-        run: cargo +stable test -p zakura-orchard --locked --features circuit-composition --doc circuit::composition
+        run: cargo +1.100.0 test -p zakura-orchard --locked --features circuit-composition --doc circuit::composition
       - name: Test without indexed ZIP 32 addresses
         run: >-
-          cargo +stable test -p zakura-orchard --locked
+          cargo +1.100.0 test -p zakura-orchard --locked
           --no-default-features --features backend-halo2 --features circuit,multicore,wallet
       - name: Verify working directory is clean
         run: git diff --exit-code
@@ -675,7 +675,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run weighted-merkle library tests
         # The weighted-merkle feature is not in the crate defaults, so its
         # gated tests (e.g. the weighted/unweighted Merkle equivalence
@@ -683,7 +683,7 @@ jobs:
         # They live in the library target, so --lib runs only the lib suite
         # with the feature enabled rather than the integration tests.
         run: >-
-          cargo +stable test -p zakura-orchard
+          cargo +1.100.0 test -p zakura-orchard
           --features weighted-merkle
           --lib
           --verbose
@@ -709,23 +709,23 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Test proof-byte verifier fixture exports
         if: matrix.part == 'proof bytes'
         run: >-
-          cargo +stable test --locked --release -p zakura-halo2-proofs
+          cargo +1.100.0 test --locked --release -p zakura-halo2-proofs
           --features unstable-verifier-fingerprint
           --test fingerprint_export
       - name: Test transcript-read serialization
         if: matrix.part == 'proof bytes'
         run: >-
-          cargo +stable test --locked --release -p zakura-halo2-proofs
+          cargo +1.100.0 test --locked --release -p zakura-halo2-proofs
           --features unstable-verifier-fingerprint
           --lib plonk::fingerprint::vesta_lean::
       - name: Test Orchard captures and malformed proof encodings
         if: matrix.part == 'circuit fixtures'
         run: >-
-          cargo +stable test --locked --release -p zakura-orchard
+          cargo +1.100.0 test --locked --release -p zakura-orchard
           --features verifier-fingerprint,circuit-fixtures
           --lib circuit::halo2::fingerprint::
       - name: Regenerate the Add and Mul circuit fixtures
@@ -733,7 +733,7 @@ jobs:
         env:
           IRONWOOD_FIXTURE_OUT: ${{ runner.temp }}/ironwood-circuit-fixtures
         run: >-
-          cargo +stable test --locked --release -p zakura-halo2-gadgets
+          cargo +1.100.0 test --locked --release -p zakura-halo2-gadgets
           --lib ecc::chip::layout_dump::dump_ironwood_fixtures
           -- --exact --ignored
       - name: Regenerate the Orchard Action circuit fixtures
@@ -741,7 +741,7 @@ jobs:
         env:
           IRONWOOD_ACTION_FIXTURE_OUT: ${{ runner.temp }}/ironwood-circuit-fixtures
         run: >-
-          cargo +stable test --locked --release -p zakura-orchard
+          cargo +1.100.0 test --locked --release -p zakura-orchard
           --features verifier-fingerprint,circuit-fixtures
           --lib circuit::halo2::layout_dump::dump_ironwood_action_fixtures
           -- --exact --ignored
@@ -762,10 +762,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Compile-check verifier-fingerprint capture
         run: >-
-          cargo +stable test -p zakura-orchard
+          cargo +1.100.0 test -p zakura-orchard
           --features verifier-fingerprint
           --no-run
           --verbose
@@ -788,24 +788,24 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Test the observational recorder
         if: matrix.part == 'halo2 recorder'
         run: >-
-          cargo +stable test --locked --release --lib
+          cargo +1.100.0 test --locked --release --lib
           -p zakura-halo2-proofs --features unstable-prover-fingerprint
           plonk::prover_fingerprint::
       - name: Test the public recorder API
         if: matrix.part == 'halo2 recorder'
         run: >-
-          cargo +stable test --locked --release --test prover_fingerprint
+          cargo +1.100.0 test --locked --release --test prover_fingerprint
           -p zakura-halo2-proofs --features unstable-prover-fingerprint
       - name: Check pinned prover proofs and RNG tapes without the verifier feature
         if: matrix.part == 'pinned proofs'
         env:
           RAYON_NUM_THREADS: '1'
         run: >-
-          cargo +stable test --locked --release --lib
+          cargo +1.100.0 test --locked --release --lib
           -p zakura-orchard --features prover-fingerprint
           circuit::halo2::prover_fingerprint::
       - name: Test both fingerprint features together
@@ -813,13 +813,13 @@ jobs:
         env:
           RAYON_NUM_THREADS: '1'
         run: >-
-          cargo +stable test --locked --release --lib
+          cargo +1.100.0 test --locked --release --lib
           -p zakura-orchard --features prover-fingerprint,verifier-fingerprint
           circuit::halo2::prover_fingerprint::
       - name: Test captures through the serial prover
         if: matrix.part == 'serial prover'
         run: >-
-          cargo +stable test --locked --release --lib
+          cargo +1.100.0 test --locked --release --lib
           -p zakura-orchard --no-default-features --features backend-halo2 --features std,prover-fingerprint
           circuit::halo2::prover_fingerprint::
       - name: Verify working directory is clean
@@ -835,7 +835,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run the multiexp tests with multicore
         # `halo2-test` runs with `--no-default-features`, which drops
         # `multicore`, so the parallel Pasta GLV multiscalar path
@@ -844,14 +844,14 @@ jobs:
         # including `test_multiexp_parallel_glv_matches_naive`, which installs
         # explicit one- and three-thread pools — with `multicore` enabled.
         run: >-
-          cargo +stable test --verbose --release
+          cargo +1.100.0 test --verbose --release
           -p zakura-halo2-proofs
           --no-default-features
           --features batch,dev-graph,gadget-traces,multicore
           -- arithmetic::test_multiexp
       - name: Run the prepared commitment tests with multicore
         run: >-
-          cargo +stable test --verbose --release
+          cargo +1.100.0 test --verbose --release
           -p zakura-halo2-proofs
           --no-default-features
           --features batch,dev-graph,gadget-traces,multicore
@@ -867,10 +867,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run weighted Merkle evaluator tests
         run: >-
-          cargo +stable test -p zakura-sinsemilla
+          cargo +1.100.0 test -p zakura-sinsemilla
           --lib
           --verbose
           -- weighted::tests
@@ -891,11 +891,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Compile tests
-        run: cargo +stable test -p zakura-orchard --verbose --no-run
+        run: cargo +1.100.0 test -p zakura-orchard --verbose --no-run
       - name: Create and verify a proof individually and in a batch
-        run: cargo +stable test -p zakura-orchard --verbose --test platform_smoke
+        run: cargo +1.100.0 test -p zakura-orchard --verbose --test platform_smoke
       - name: Run weighted Merkle vector tests on the Apple AArch64 assembly backend
         # The macOS runner is Apple silicon, the only place the
         # `pasta_curves/aarch64-asm` field backend is live. Linux already runs
@@ -905,7 +905,7 @@ jobs:
         # pinned to the same external bytes on real hardware.
         if: matrix.os == 'macOS-latest'
         run: >-
-          cargo +stable test -p zakura-orchard
+          cargo +1.100.0 test -p zakura-orchard
           --features weighted-merkle,aarch64-asm
           --lib
           --verbose
@@ -956,10 +956,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run tests
         run: >-
-          cargo +stable test -p zakura-pasta-curves
+          cargo +1.100.0 test -p zakura-pasta-curves
           --verbose
           --release
           ${{ matrix.features }}
@@ -969,12 +969,12 @@ jobs:
           RUSTFLAGS: -C target-feature=+adx,+bmi2
         run: |
           if grep -qw adx /proc/cpuinfo && grep -qw bmi2 /proc/cpuinfo; then
-            cargo +stable test -p zakura-pasta-curves \
+            cargo +1.100.0 test -p zakura-pasta-curves \
               --verbose --release --features=multicore \
               --target x86_64-unknown-linux-gnu
           else
             echo "Runner lacks ADX/BMI2; compile assembly tests without running."
-            cargo +stable test -p zakura-pasta-curves \
+            cargo +1.100.0 test -p zakura-pasta-curves \
               --verbose --release --features=multicore --no-run \
               --target x86_64-unknown-linux-gnu
           fi
@@ -995,17 +995,17 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Compile tests
         run: >-
-          cargo +stable test -p zakura-pasta-curves
+          cargo +1.100.0 test -p zakura-pasta-curves
           --verbose
           --release
           --all-features
           --no-run
       - name: Test field arithmetic
         run: >-
-          cargo +stable test -p zakura-pasta-curves
+          cargo +1.100.0 test -p zakura-pasta-curves
           --verbose
           --release
           --all-features
@@ -1017,7 +1017,7 @@ jobs:
       - name: Test Apple AArch64 assembly
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
         run: >-
-          cargo +stable test -p zakura-pasta-curves
+          cargo +1.100.0 test -p zakura-pasta-curves
           --verbose
           --release
           --all-features
@@ -1039,14 +1039,14 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
         with:
           targets: aarch64-unknown-linux-gnu
       - name: Install AArch64 cross linker
         run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
       - name: Compile and link Pasta tests
         run: >-
-          cargo +stable test -p zakura-pasta-curves
+          cargo +1.100.0 test -p zakura-pasta-curves
           --target aarch64-unknown-linux-gnu
           --features aarch64-asm
           --release
@@ -1054,7 +1054,7 @@ jobs:
           --verbose
       - name: Compile and link Halo 2 tests
         run: >-
-          cargo +stable test -p zakura-halo2-proofs
+          cargo +1.100.0 test -p zakura-halo2-proofs
           --target aarch64-unknown-linux-gnu
           --release
           --no-run
@@ -1083,14 +1083,14 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
         with:
           targets: aarch64-unknown-none
       - name: Install AArch64 assembler
         run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
       - name: Build Pasta with the assembly backend
         run: >-
-          cargo +stable build -p zakura-pasta-curves
+          cargo +1.100.0 build -p zakura-pasta-curves
           --target aarch64-unknown-none
           --no-default-features
           --features aarch64-asm
@@ -1177,8 +1177,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
-      - run: cargo +stable test -p zakura-reddsa -p zakura-reddsa-frost --features nightly,serde,thiserror,zeroize --locked
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
+      - run: cargo +1.100.0 test -p zakura-reddsa -p zakura-reddsa-frost --features nightly,serde,thiserror,zeroize --locked
       - name: Check the plain RedDSA dependency graph
         shell: bash
         run: |
@@ -1219,8 +1219,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
-      - run: cargo +stable test -p zakura-redjubjub --all-features --locked
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
+      - run: cargo +1.100.0 test -p zakura-redjubjub --all-features --locked
 
   redjubjub-no-std:
     name: redjubjub / Build no_std for ${{ matrix.target }}
@@ -1259,10 +1259,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Run tests
         run: >-
-          cargo +stable test
+          cargo +1.100.0 test
           -p zakura-pairing
           -p zakura-bls12-381
           -p zakura-jubjub
@@ -1273,11 +1273,11 @@ jobs:
           --release
       - name: Test Sapling without indexed ZIP 32 addresses
         run: >-
-          cargo +stable test -p zakura-sapling-crypto --locked
+          cargo +1.100.0 test -p zakura-sapling-crypto --locked
           --no-default-features --features circuit,multicore,wallet --release
       - name: Test bellman without multicore
         run: >-
-          cargo +stable test -p zakura-bellman --locked
+          cargo +1.100.0 test -p zakura-bellman --locked
           --no-default-features --features groth16 --release
       - name: Verify working directory is clean
         run: git diff --exit-code
@@ -1296,10 +1296,10 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - name: Compile tests
         run: >-
-          cargo +stable test
+          cargo +1.100.0 test
           -p zakura-pairing
           -p zakura-bls12-381
           -p zakura-jubjub
@@ -1311,7 +1311,7 @@ jobs:
           --no-run
       - name: Test platform randomness and note encryption
         run: >-
-          cargo +stable test -p zakura-sapling-crypto
+          cargo +1.100.0 test -p zakura-sapling-crypto
           --all-features
           --verbose
           --release
@@ -2121,7 +2121,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@4360b52568e2003a75bf9bc1d59f33a8e3fc893c # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned stable; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
       - run: cargo fetch --locked
       - run: python3 .github/scripts/test_supported_features.py
       - run: python3 .github/scripts/check_native_backend.py

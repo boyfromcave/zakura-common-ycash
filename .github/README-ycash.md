@@ -110,6 +110,31 @@ workflow in the table above, and move it off if it is a release or fleet job.
 `ci.yml` has six jobs that upstream itself turned off with `if: false` (Sensei and Udon). They stay
 as upstream wrote them; `.github/actionlint.yaml` ignores that one actionlint finding for `ci.yml`.
 
+## The Rust toolchain
+
+The fork builds with the exact Rust version kogany builds with (beta3 item 15, 2026-11-15):
+`rust-toolchain.toml` pins `channel` (with `clippy` and `rustfmt`), and `ci.yml`'s lanes that
+upstream ran on `stable` name the same version (`cargo +<ver>`, and the `dtolnay/rust-toolchain`
+commit of that version's branch). The MSRV lanes (`1.97.0`, in `ci.yml` and `ycash-check.yml`),
+the nightly lanes and `crates/orchard/benches/README.md`'s own pin are unchanged. kogany pins the
+fork by git rev, but a change to toolchain files alone needs no new rev there: kogany's own
+`rust-toolchain.toml` decides the compiler for its builds.
+
+To bump it, in one PR to `upgrade/vault`, together with kogany's (its `.github/README-kogany.md`,
+"The Rust toolchain"):
+
+1. Pick a released stable version; install it with `rustup toolchain install <ver> -c clippy,rustfmt`.
+2. Change `channel` in `rust-toolchain.toml` and every `cargo +<old>` in `.github/workflows/ci.yml`
+   and `.github/scripts/check_rust_group.sh` (`git grep -n '+<old>' -- .github`).
+3. Replace the `dtolnay/rust-toolchain@<sha> ... pinned <old>` commit with the head of the
+   action's `<ver>` branch (`gh api repos/dtolnay/rust-toolchain/branches/<ver> --jq .commit.sha`),
+   after checking that its `action.yml` differs from the current pin only in the version.
+4. Run `cargo fmt --all --check`, `cargo clippy --locked --workspace --all-targets -- -D warnings`
+   and the `ycash` gate (feature off and on) with the new compiler, and say in the PR body which
+   version CI used before and after.
+
+Never bump it while a release is in qualification.
+
 ## Security CI
 
 This is the same design as every Yellowback repository (ycash6's `SECURITY-CI.md`), trimmed to what
