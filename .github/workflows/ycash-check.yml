@@ -84,7 +84,7 @@ jobs:
           repository: boyfromcave/zakura-common-ycash
           ref: ${{ inputs.ref || github.sha }}
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
       - name: cargo test (ycash feature ${{ matrix.ycash }})
         env:
           YCASH: ${{ matrix.ycash }}
