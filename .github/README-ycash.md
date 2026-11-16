@@ -76,8 +76,8 @@ comment, and `semgrep.yml` no longer runs on pushes to every branch. A push to a
 or an inherited upstream branch, or a branch deletion, starts nothing. `ci.yml` has no
 `workflow_dispatch`, because its path filter supports only pull request and push events;
 `ycash-check.yml` is the dispatchable check. Scheduled runs (the nightly `supply-chain.yml`,
-`semgrep.yml` and `secops.yml`, and the weekly `codeql.yml`) start doing useful work once the
-default branch, `upgrade/vault`, carries these files.
+`semgrep.yml` and `secops.yml`, and the weekly `codeql.yml`) run from the default branch,
+`upgrade/vault`.
 
 ### `ycash-check.yml`
 
@@ -161,7 +161,8 @@ IDs to their one definition in `crates/zcash_protocol/src/consensus.rs`.
 
 ### Turning Actions on
 
-Do this when the Yellowback lead architect decides to:
+Actions are on for the fork, and its default branch is `upgrade/vault`. The steps are kept for a
+fresh fork or a repository where they were turned off again:
 
 1. Settings → Code security: enable code scanning (for the SARIF uploads) and Dependabot security
    updates. For `semgrep.yml`'s `sync` job, allow GitHub Actions to create pull requests
@@ -169,5 +170,6 @@ Do this when the Yellowback lead architect decides to:
 2. Set the default branch to `upgrade/vault` before relying on any scheduled run.
 3. Nothing has to be disabled: the off set lives in `.github/workflows-off/`, and every other
    workflow triggers only on the fork's branches (Triggers above).
-4. Rulesets on `vaults/kogany-compat` and `upgrade/vault`, after the first green run: require
+4. Rulesets on `upgrade/vault` (`vaults/kogany-compat` is a record since 2026-11-05, never
+   committed to), after the first green run: require
    `workflow triggers`, `ci.yml`'s `test-success`, and the security checks.
