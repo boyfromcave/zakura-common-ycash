@@ -321,7 +321,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.100.0 (zakura-common-ycash 2026-11-15: was stable; .github/README-ycash.md "The Rust toolchain"); action uses orphan commits
         with:
           components: clippy
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
       - name: Install build dependencies
         run: sudo apt-get update && sudo apt-get install -y libfontconfig1-dev
       # One package per invocation: a grouped invocation lets Cargo unify
@@ -425,7 +425,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@7c8d7d138f5c09cef361f8214cf96882cd029cdb # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned nightly; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned nightly; action uses orphan commits
         with:
           components: rustfmt
       - name: Check formatting
@@ -540,7 +540,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: i686-unknown-linux-gnu
       - name: Install cross-platform support dependencies
@@ -597,7 +597,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - name: Build target
@@ -620,7 +620,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@7c8d7d138f5c09cef361f8214cf96882cd029cdb # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned nightly; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned nightly; action uses orphan commits
       - name: Install build dependencies
         # --all-features enables plotters' TTF text rendering, which links the
         # system fontconfig (same as the rust-checks all-feature check).
@@ -930,7 +930,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - name: Build no_std target
@@ -1124,7 +1124,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: i686-unknown-linux-gnu
       - name: Install cross-platform support dependencies
@@ -1155,7 +1155,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - name: Build target
@@ -1198,7 +1198,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: thumbv6m-none-eabi
       - run: >-
@@ -1238,7 +1238,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - run: >-
@@ -1335,7 +1335,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - name: Build target
@@ -1362,7 +1362,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
       - name: Run tests
         run: cargo +1.97.0 test -p zakura-equihash --all-features --locked
       - name: Check no-default-features
@@ -1401,7 +1401,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
       - name: Run tests
         # zakura-common-ycash (2026-11-01): upstream's step, on the feature-off legs.
         if: matrix.ycash != 'on'
@@ -1447,7 +1447,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           components: clippy
       - name: Check node construction without wallet derivation
@@ -1586,7 +1586,7 @@ jobs:
       - name: Install beta Clippy
         if: ${{ !cancelled() }}
         continue-on-error: true
-        uses: dtolnay/rust-toolchain@482f49bd06e5fc9083e4fd71e1327793b1c839fe # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned beta; action uses orphan commits
+        uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned beta; action uses orphan commits
         with:
           components: clippy
       - name: Clippy on beta
@@ -1627,7 +1627,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@ca36e3307eb02aaffd8a9268ae90e586fd4f461e # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
+      - uses: dtolnay/rust-toolchain@d5e4d57b030548f435d0befec15ff413a2c60eff # zizmor: ignore[impostor-commit,ref-version-mismatch] -- pinned 1.97.0; action uses orphan commits
         with:
           targets: ${{ matrix.target }}
       - name: Install cross-platform support dependencies
@@ -1662,7 +1662,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
       - name: Check feature configuration
@@ -1703,7 +1703,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
       - name: Test shared definitions, generators, and macros
@@ -1730,7 +1730,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
       - name: Clippy without optional features
@@ -1798,7 +1798,7 @@ jobs:
         env:
           EXPECTED_ARCH: ${{ matrix.arch }}
         run: test "$(uname -m)" = "$EXPECTED_ARCH"
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
           # The compile-test harnesses build generated consumer crates with
@@ -1888,7 +1888,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
           # The consumer harnesses build generated crates with the ambient
@@ -1919,7 +1919,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
       - name: Exercise field benchmarks
@@ -1994,7 +1994,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@ecabd13d1c56bd1345c230e542e9144811ad706f # v2.0.0
+      - uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
         with:
           cache: false
           # The portability harness builds generated crates with the ambient
