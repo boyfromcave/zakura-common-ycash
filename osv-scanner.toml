@@ -89,3 +89,8 @@ reason = "tokio 1.53.1 (AsyncFd safe constructors violate I/O safety; fixed in 1
 id = "RUSTSEC-2026-0192"
 ignoreUntil = 2027-01-29T00:00:00Z
 reason = "ttf-parser 0.20.0: via plotters, used by criterion benchmarks and halo2's optional `dev-graph` circuit plotting; parses only bundled fonts, never network input."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0543"
+ignoreUntil = 2027-02-15T00:00:00Z
+reason = "chrono 0.4.45 (informational: unmaintained, no vulnerability, no fixed version; accepted by the Yellowback lead architect 2026-11-18): via plotters 0.3.7, used by criterion benchmarks and halo2's optional `dev-graph` circuit plotting; never built into a library kogany takes (the cargo-deny leg's default graph does not reach it). Leaves when plotters drops chrono or the benchmarks move off plotters, at an upstream sync."
